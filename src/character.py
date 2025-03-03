@@ -39,6 +39,12 @@ class Character(ABC):
         self.state["性欲"] = max(0, min(100, self.state["性欲"] + arousal_change))
         self.state["舒适度"] = max(0, min(100, self.state["舒适度"] + comfort_change))
         self.state["开放"] = max(0, min(100, self.state["开放"] + openness_change))
+    
+    def updateHistory(self, action):
+        self.history.append(action)
+
+    def getHistory(self):
+        return self.history
 
     
 

@@ -2,9 +2,9 @@ from action import Action
 import os
 
 class UI:
-    def display_status(self, player, partner):
-        print(f"\n==== {partner.name} 的状态 ====")
-        for key, value in partner.state.items():
+    def display_status(self, character):
+        print(f"\n==== {character.name} 的状态 ====")
+        for key, value in character.state.items():
             print(f"{key}: {value}")
 
     def get_action_choice(self):
@@ -29,9 +29,14 @@ class UI:
     def display_result(self, result):
         print(f"\n{result}")
 
-    def display_end_message(self, partner):
+    def display_end_message(self, player, partner):
         if partner.state["高潮"]:
-            print(f"\n{partner.name} 达到了高潮，游戏结束。")
+            print(f"\n{partner.name} 已经完全沉醉于快感中，他的身体不受控制地抽搐起来，手指在你身上抓出一道道痕迹，用最缠绵的声音呻吟着达到了巅峰。" +\
+                  "乳白色的液体从他的阴茎喷涌而出。过了许久，他才慢慢恢复了平静，脸上泛起一片红晕。" +\
+                      "\n “我爱你。”他凑到你的耳边轻轻对你说，然后在你脸上亲了一下。")
+            print(f"你的历史操作:")
+            for action in player.getHistory():
+                print(action)
     
     def clean_screen(self):
         os.system('cls||clear')
