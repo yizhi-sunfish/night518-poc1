@@ -7,12 +7,12 @@ class Character(ABC):
         self.name = name
         self.is_player = is_player
         self.state = {
-            "精神": 100,  # 影响耐心、抗拒程度
-            "性欲": 0,   # 影响接受度
-            "舒适度": 50, # 低时会抗拒
+            "精神": 100, # 影响耐心、抗拒程度
+            "性欲": 10,   
+            "体感": 50,  # 低时会抗拒
             "专注": 100, # 低时难以控制行为
             "高潮": False, # 达到高潮则游戏结束
-            "开放": 100, # 低时会抗拒
+            "开放": 0, # 低时会抗拒
         }
         self.history = []
         self.currentActions = []
@@ -37,7 +37,7 @@ class Character(ABC):
     
     def updateState(self, arousal_change=0, comfort_change=0, openness_change=0):
         self.state["性欲"] = max(0, min(100, self.state["性欲"] + arousal_change))
-        self.state["舒适度"] = max(0, min(100, self.state["舒适度"] + comfort_change))
+        self.state["体感"] = max(0, min(100, self.state["体感"] + comfort_change))
         self.state["开放"] = max(0, min(100, self.state["开放"] + openness_change))
     
     def updateHistory(self, action):

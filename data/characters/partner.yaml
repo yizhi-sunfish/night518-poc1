@@ -36,10 +36,10 @@ bodyParts:
     currentAction: ""
     isCovered: true
 clothing:
-  - 背心:
+  - 白色背心:
       covers:
         - 胸部
-  - 内裤:
+  - 四角内裤:
       covers:
         - 阴茎
         - 臀部

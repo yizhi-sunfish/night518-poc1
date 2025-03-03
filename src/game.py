@@ -16,7 +16,7 @@ class Game:
         self.ui.display_result(self.result)
         Event.check_triggers(self.partner)
         self.ui.display_status(self.partner)
-        action = self.ui.get_action_choice()
+        action = self.ui.get_action_choice(self.player, self.partner)
         self.result = action.execute(self.player, self.partner)
         self.player.updateHistory(action)
         

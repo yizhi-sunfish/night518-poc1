@@ -1,7 +1,7 @@
 class Action:
     def __init__(self, name, effects, condition=None):
         self.name = name
-        self.effects = effects  # 字典 {"性欲": +10, "舒适度": -5}
+        self.effects = effects  # 字典 {"性欲": +10, "体感": -5}
         self.condition = condition  # 例如 lambda player, partner: partner.state["开放"] < 50
 
     def can_execute(self, player, partner):
