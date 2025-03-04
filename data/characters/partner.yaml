@@ -10,6 +10,7 @@ bodyParts:
     isCovered: true
   嘴:
     isOccupied: false
+    currentState: "空闲"
     currentAction: ""
     isCovered: true
   左手:
@@ -36,10 +37,10 @@ bodyParts:
     currentAction: ""
     isCovered: true
 clothing:
-  - 白色背心:
-      covers:
-        - 胸部
-  - 四角内裤:
-      covers:
-        - 阴茎
-        - 臀部
+  白色背心:
+    covers:
+      胸部
+  四角内裤:
+    covers:
+      阴茎
+      臀部
