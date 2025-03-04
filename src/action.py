@@ -3,6 +3,7 @@ class Action:
         self.name = name
         self.actor = actor # 行动发起者
         self.target = target # 行动对象
+        self.canContinue = False # 行动是否默认持续多回合
         # TODO: 拓展effect的格式：
         # 1. 人物状态更新
         # 2. 人物衣物更新
@@ -43,4 +44,3 @@ class Action:
         
     def get_effect(self):
         """根据self.effects生成行动效果文本"""
-        

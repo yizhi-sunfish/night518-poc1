@@ -3,8 +3,9 @@ from action import Action
 from clothing import Clothing
 
 class Character(ABC):
-    def __init__(self, name, is_player=False):
+    def __init__(self, name, is_player=False, nickname=""):
         self.name = name
+        self.nickname = nickname
         self.is_player = is_player
         self.state = {
             "精神": 100, # 影响耐心、抗拒程度

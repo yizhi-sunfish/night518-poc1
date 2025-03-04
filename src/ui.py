@@ -10,11 +10,13 @@ class UI:
     def get_action_choice(self, player, partner):
         """获取玩家选择的行动"""
         #TODO: 从文件读取行动列表
+        #TODO: 支持多个不冲突的行动
+        #TODO: 更合理的可选行动布局
         actions = [
             Action("表达爱意", player, partner, {"开放": +5}),
             Action("责骂", player, partner, {"开放": -5, "性欲": -5}),
             Action("轻吻", player, partner, {"性欲": +2, "体感": +2, "开放": +2}),
-            Action("深入亲吻", player, partner, {"性欲": +5, "体感": 5, "开放": +5}, condition=lambda p, n: n.state["性欲"] > 10),
+            Action("深入亲吻", player, partner, {"性欲": +5, "体感": +5, "开放": +5}, condition=lambda p, n: n.state["性欲"] > 10),
             Action("温柔爱抚", player, partner, {"体感": +2, "开放": +2}),
             Action("拉开衣物", player, partner, {"性欲": +5, "开放": +5}, condition=lambda p, n: n.state["开放"] > 20),
             Action("脱掉衣物", player, partner, {"性欲": +5, "体感": +5, "开放": +5}, condition=lambda p, n: n.state["开放"] > 30),
