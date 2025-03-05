@@ -4,3 +4,18 @@
 "深入亲吻": 
   file: kiss.yaml
   id: deep_kiss
+"表达爱意":
+  file: speech.yaml
+  id: express_love
+"责骂":
+  file: speech.yaml
+  id: scold
+"爱抚":
+  file: movement.yaml
+  id: caress
+"脱衣":
+  file: clothing.yaml
+  id: undress
+"脱下":
+  file: clothing.yaml
+  id: take_off

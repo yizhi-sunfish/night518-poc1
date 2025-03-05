@@ -39,8 +39,8 @@ bodyParts:
 clothing:
   白色背心:
     covers:
-      胸部
+      - 胸部
   四角内裤:
     covers:
-      阴茎
-      臀部
+      - 阴茎
+      - 臀部

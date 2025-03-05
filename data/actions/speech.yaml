@@ -1,0 +1,48 @@
+express_love:
+  name: "表达爱意"
+  canContinue: false
+  effects:
+    target:
+      state:
+        开放: +5
+  description:
+    start:
+      - "actor低声向target诉说着自己有多想他，target向actor微笑，把头靠在actor的肩上，“我也是”。"
+      - "actor对target说：“你看上去像个天使。”target的脸红了，他的眼睛里闪烁着幸福的光芒。"
+      - "“你是我眼里最完美的人。”actor说。target摇摇头，不好意思接受这份赞美，他的嘴里嘀咕着什么，actor听不清楚。"
+      - "actor向target形容自己眼里的他有多可爱和美丽，target羞涩地笑着。"
+      - "“我爱你。”actor说。target无比认真地看着actor，问：“我们会永远在一起，对吗？”"
+  conditions:
+      all:
+        - type: "bodyPart"
+          owner: "actor"
+          bodyPart: "嘴"
+          isOccupied: false
+        - type: "state"
+          owner: actor
+          state: "精神"
+          min: 30
+
+scold:
+  name: "责骂"
+  canContinue: false
+  effects:
+    target:
+      state:
+        开放: -5
+        性欲: -5
+  description:
+    start:
+      - "actor从上到下打量了一遍target，冷哼了一声：”你是不是得意忘形了？“target僵住了，他不知道自己做错了什么，但还是小心翼翼地说：“对不起。”"
+      - "target不小心扯到了actor的头发，actor瞪着target，声音冷冷地说：“你为什么还是那么没用？”target的脸色一下子变得苍白，actor的话语刺痛了他，他的眼睛里充满了恐惧。"
+      - "actor看着target无辜的面容，嫉恨的情绪在心中燃烧，在意识到的时候，带刺的话语已经脱口而出：“凭什么你过得比我好，凭什么你没有遭受我经历的一切，凭什么！”\ntarget的嘴唇颤抖着，努力挤出话来安慰actor：“……从今以后我会保护好你的。”"
+  conditions:
+      all:
+        - type: "bodyPart"
+          owner: "actor"
+          bodyPart: "嘴"
+          isOccupied: false
+        - type: "state"
+          owner: actor
+          state: "精神"
+          max: 20
