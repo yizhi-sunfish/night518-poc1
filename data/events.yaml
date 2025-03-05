@@ -1,0 +1,12 @@
+- name: 上身赤裸
+  conditions:
+    - bodyPart: 胸部
+      covered: false
+  description: "佐音的上身裸露在空气中，他有些难为情地低下了头。他的身材像艺术品一样完美，你贪婪地看了很久。\n一想到这个美丽的男孩只属于你，你就无比满足。"
+- name: 下身赤裸
+  conditions:
+    - bodyPart: 阴茎
+      covered: false
+    - bodyPart: 臀部
+      covered: false
+  description: "随着衣物的褪去，佐音的阴茎弹跳出来，他立刻蜷起身子挡住了你的视线。\n“不要看……”他的声音有些颤抖，脸色更加羞赧，眼神躲闪着不敢和你对视。"

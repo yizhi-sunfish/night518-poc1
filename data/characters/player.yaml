@@ -1,8 +1,10 @@
-name: 佐音
+name: 你
+nickname: 阿伦
 state: 
-  性欲: 0
-  体感: 50
-  开放度: 0
+  性欲: 60
+  体感: 30
+  精神: 20
+  专注: 100
 bodyParts:
   表情:
     isOccupied: false
@@ -36,10 +38,10 @@ bodyParts:
     currentAction: ""
     isCovered: true
 clothing:
-  - 背心:
-      covers:
-        - 胸部
-  - 内裤:
-      covers:
-        - 阴茎
-        - 臀部
+  高领紧身衣:
+    covers:
+      胸部
+  黑色短裤:
+    covers:
+      阴茎
+      臀部

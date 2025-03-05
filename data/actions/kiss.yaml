@@ -1,0 +1,66 @@
+gentle_kiss:
+  name: "轻吻"
+  canContinue: false
+  effects:
+    target:
+      state:
+        性欲: +2
+        体感: +2
+        开放: +2
+  description:
+    start:
+      - "actor轻轻地吻了target的唇，他的嘴唇柔软而温暖，让actor感到一阵阵的幸福。"
+      - "actor的吻像蝴蝶一样轻轻落在target的唇上，转瞬又离开。target咯咯地笑起来：“好痒啊。”"
+      - "actor凑到target面前在他唇上落下一吻。让actor没想到的是，target模仿着actor的样子，略带羞涩地靠近并回了一个吻。在那之后，他根本不敢看actor的眼睛。"
+  conditions:
+      all:
+        - type: "bodyPart"
+          owner: "actor"
+          bodyPart: "嘴"
+          isOccupied: false
+        - type: "bodyPart"
+          owner: "target"
+          bodyPart: "嘴"
+          isOccupied: false
+
+deep_kiss:
+  name: "深入亲吻"
+  canContinue: true
+  effects:
+    target:
+      state:
+        性欲: +5
+        体感: +5
+        开放度: +5
+  #      clothing:
+  #        None
+      bodyParts:
+        嘴:
+          isOccupied: true
+    actor:
+      bodyParts:
+        嘴:
+          isOccupied: true
+    description: 
+      start:
+        - "actor把嘴巴压在target的唇上轻轻撕咬，用牙齿有些强硬地撬开他的嘴，将湿润的舌头探入他的口中，拨弄他的口腔内部。你感到他的鼻息变重了，身体也开始不安分地扭来扭去。"
+        - "“把嘴张开。”actor命令道。target迟疑了一下，但乖乖地照做了。他顺从地闭上眼，微微抬起头，让actor心中升起一股愉悦的满足感。actor有些粗暴地拉起他的下巴，贪婪地品尝着他的顺从。"
+      continue:
+        - "actor的舌头在target的口中游走，偶尔泄露出一声被欲望催生出的轻哼，让他感到一阵阵的颤栗。"
+        - "actor暂时放开了target的嘴，看了看他羞红了的脸。“真可爱。”actor说着，又将这个吻继续下去。"
+        - "actor和target谁也不愿意先分开，你们共享着彼此炽热的呼吸，共同沉浸在这一刻的浪漫中。"
+      end:
+        - "actor和target分开时，唾液在你们的唇间留下了一道细细的银线，target显然也注意到了这一点，他的脸羞得通红，什么话都说不出来。"
+  conditions:
+    all:
+      - type: "state"
+        state: "性欲"
+        min: 10
+      - type: "bodyPart"
+        owner: "actor"
+        bodyPart: "嘴"
+        isOccupied: false
+      - type: "bodyPart"
+        owner: "target"
+        bodyPart: "嘴"
+        isOccupied: false

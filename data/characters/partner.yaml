@@ -1,0 +1,46 @@
+name: 佐音
+state: 
+  性欲: 0
+  体感: 50
+  开放度: 0
+bodyParts:
+  表情:
+    isOccupied: false
+    currentAction: ""
+    isCovered: true
+  嘴:
+    isOccupied: false
+    currentState: "空闲"
+    currentAction: ""
+    isCovered: true
+  左手:
+    isOccupied: false
+    currentAction: ""
+    isCovered: true
+  右手:
+    isOccupied: false
+    currentAction: ""
+    isCovered: true
+  阴茎:
+    isOccupied: false
+    currentState: "未勃起"
+    currentAction: ""
+    isCovered: true
+  臀部:
+    isOccupied: false
+    currentState: "未扩张"
+    currentAction: ""
+    isCovered: true
+  胸部:
+    isOccupied: false
+    currentState: "平静"
+    currentAction: ""
+    isCovered: true
+clothing:
+  白色背心:
+    covers:
+      胸部
+  四角内裤:
+    covers:
+      阴茎
+      臀部

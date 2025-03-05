@@ -6,7 +6,7 @@ class Character:
     def __init__(self, name):
         self.name = name
         self.arousal = 10   # 性欲
-        self.comfort = 50  # 舒适度/体感
+        self.comfort = 50  # 体感/体感
         self.openness = 0 # 开放度
         self.reactions = "" # 反应文本
     
@@ -22,7 +22,7 @@ class Character:
         return self.reactions
     
     def set_reaction(self):
-        # 佐音的反应根据舒适度来判定
+        # 佐音的反应根据体感来判定
         if self.comfort < 20:
             self.reactions = "佐音的脸色变得苍白，他的眼神中透露出不安。"
         elif self.comfort < 40:

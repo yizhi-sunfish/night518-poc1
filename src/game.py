@@ -4,20 +4,21 @@ from ui import UI
 
 class Game:
     def __init__(self):
-        self.player = Character("阿伦", is_player=True)
+        self.player = Character("你", is_player=True) # 阿伦第二人称
         self.partner = Character("佐音", is_player=False)
         self.ui = UI()
         self.running = True
-        self.result = []
+        self.result = ""
 
     def play_turn(self):
         """处理游戏的一个回合"""
         self.ui.clean_screen()
         self.ui.display_result(self.result)
         Event.check_triggers(self.partner)
-        self.ui.display_status(self.player, self.partner)
-        action = self.ui.get_action_choice()
-        self.result = action.execute(self.player, self.partner)
+        self.ui.display_status(self.partner)
+        action = self.ui.get_action_choice(self.player, self.partner)
+        self.result = action.execute()
+        self.player.updateHistory(action)
         
         # 终止条件
         if self.partner.state["高潮"]:
@@ -27,5 +28,5 @@ class Game:
         """主循环"""
         while self.running:
             self.play_turn()
-        self.ui.display_end_message(self.partner)
+        self.ui.display_end_message(self.player, self.partner)
 
