@@ -1,32 +1,29 @@
 from abc import ABC, abstractmethod
 from action import Action
 from clothing import Clothing
+import yaml
 
 class Character(ABC):
-    def __init__(self, name, is_player=False, nickname=""):
-        self.name = name
-        self.nickname = nickname
-        self.is_player = is_player
+    def __init__(self, character_file, is_player=False):
         # TODO: 从文件读取角色状态
-        self.state = {
-            "精神": 100, # 影响耐心、抗拒程度
-            "性欲": 10,   
-            "体感": 50,  # 低时会抗拒
-            "专注": 100, # 低时难以控制行为
-            "高潮": False, # 达到高潮则游戏结束
-            "开放": 0, # 低时会抗拒
-        }
-        # TODO: 从文件读取角色衣物
-        self.clothing = {
-#            "白色背心": ["胸部"],
-#            "四角内裤": ["阴茎", "臀部"],
-        }
+        print("Fetching from file")
+        with open(character_file, 'r') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
+        self.name = data.get('name','')
+        self.state = (data.get('state', {}))
+        self.bodyParts = data.get('bodyParts', {})
+        self.clothing = data.get('clothing', {})
+
+        self.is_player = is_player
+
         self.history = []
         self.currentActions = []
         self.currentReactions = []
         self.nextActions = []
         self.previousRoundResult = ""
         self.clothing = []
+        self.bodyParts = {}
+        
 
     def change_state(self, key, amount):
         """修改角色状态"""
@@ -57,6 +54,5 @@ class Character(ABC):
 
     def getHistory(self):
         return self.history
-
     
 

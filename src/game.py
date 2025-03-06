@@ -4,8 +4,8 @@ from ui import UI
 
 class Game:
     def __init__(self):
-        self.player = Character("你", is_player=True) # 阿伦第二人称
-        self.partner = Character("佐音", is_player=False)
+        self.player = Character("data/characters/player.yaml", is_player=True) 
+        self.partner = Character("data/characters/partner.yaml", is_player=False)
         self.ui = UI()
         self.running = True
         self.result = ""
@@ -21,7 +21,7 @@ class Game:
         self.player.updateHistory(action)
         
         # 终止条件
-        if self.partner.state["高潮"]:
+        if self.partner.state["性欲"] >= 100:
             self.running = False
 
     def run(self):

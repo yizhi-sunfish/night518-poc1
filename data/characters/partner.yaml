@@ -2,7 +2,7 @@ name: 佐音
 state: 
   性欲: 0
   体感: 50
-  开放度: 0
+  开放: 0
 bodyParts:
   表情:
     isOccupied: false

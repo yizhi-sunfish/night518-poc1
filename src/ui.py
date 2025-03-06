@@ -43,7 +43,7 @@ class UI:
 
     # TODO: 从文件读取结局文本
     def display_end_message(self, player, partner):
-        if partner.state["高潮"]:
+        if partner.state["性欲"] >= 100:
             print(f"\n{partner.name} 已经完全沉醉于快感中，他的身体不受控制地抽搐起来，手指在你身上抓出一道道痕迹，用最缠绵的声音呻吟着达到了巅峰。" +\
                   "乳白色的液体从他的阴茎喷涌而出。\n\n过了许久，他才慢慢恢复了平静，脸上泛起一片红晕。" +\
                       "\n\n“我爱你。”他凑到你的耳边轻轻对你说，然后在你脸上亲了一下。\n\n")
