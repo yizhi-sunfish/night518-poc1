@@ -7,20 +7,20 @@ bodyParts:
   表情:
     isOccupied: false
     currentAction: ""
-    isCovered: true
+    isCovered: false
   嘴:
     isOccupied: false
     currentState: "空闲"
     currentAction: ""
-    isCovered: true
+    isCovered: false
   左手:
     isOccupied: false
     currentAction: ""
-    isCovered: true
+    isCovered: false
   右手:
     isOccupied: false
     currentAction: ""
-    isCovered: true
+    isCovered: false
   阴茎:
     isOccupied: false
     currentState: "未勃起"

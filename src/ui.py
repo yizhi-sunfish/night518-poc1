@@ -1,5 +1,6 @@
 from action import Action
 import os
+import yaml
 
 class UI:
     def display_status(self, character):
@@ -12,20 +13,9 @@ class UI:
         #TODO: 从文件读取行动列表
         #TODO: 支持多个不冲突的行动
         #TODO: 更合理的可选行动布局
-        actions = [
-            Action("表达爱意", player, partner, {"开放": +5}),
-            Action("责骂", player, partner, {"开放": -5, "性欲": -5}),
-            Action("轻吻", player, partner, {"性欲": +2, "体感": +2, "开放": +2}),
-            Action("深入亲吻", player, partner, {"性欲": +5, "体感": +5, "开放": +5}, condition=lambda p, n: n.state["性欲"] > 10),
-            Action("温柔爱抚", player, partner, {"体感": +2, "开放": +2}),
-            Action("拉开衣物", player, partner, {"性欲": +5, "开放": +5}, condition=lambda p, n: n.state["开放"] > 20),
-            Action("脱掉衣物", player, partner, {"性欲": +5, "体感": +5, "开放": +5}, condition=lambda p, n: n.state["开放"] > 30),
-            Action("舔舐乳头", player, partner, {"性欲": +7, "体感": +7}, condition=lambda p, n: n.state["开放"] > 50),
-            Action("粗暴地刺激性器官", player, partner, {"性欲": +10, "体感": -10, "开放": +15}, condition=lambda p, n: n.state["开放"] > 50),
-            Action("互相口交", player, partner, {"性欲": +20, "体感": +20, "开放": +20}, condition=lambda p, n: n.state["开放"] > 90),
-            Action("插入", player, partner, {"性欲": +20, "体感": -30}, condition=lambda p, n: n.state["开放"] > 60),
-            Action("抽插", player, partner, {"性欲": +20, "体感": +30}, condition=lambda p, n: n.state["开放"] > 60)
-        ]
+        with open('data/actions/index.yaml', 'r', encoding='utf-8') as file:
+            actions_data = yaml.safe_load(file)
+        actions = [Action(id, 'data/actions/'+file_name, player, partner) for id, file_name in actions_data.items()]
         
         print("\n可选行动:")
         j = 0

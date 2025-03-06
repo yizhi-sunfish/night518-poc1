@@ -1,21 +1,9 @@
-"轻吻": 
-  file: kiss.yaml
-  id: gentle_kiss
-"深入亲吻": 
-  file: kiss.yaml
-  id: deep_kiss
-"表达爱意":
-  file: speech.yaml
-  id: express_love
-"责骂":
-  file: speech.yaml
-  id: scold
-"爱抚":
-  file: movement.yaml
-  id: caress
-"脱衣":
-  file: clothing.yaml
-  id: undress
-"脱下":
-  file: clothing.yaml
-  id: take_off
+gentle_kiss: kiss.yaml
+deep_kiss: kiss.yaml
+express_love: speech.yaml
+scold: speech.yaml
+caress: movements.yaml
+undress: clothing.yaml
+take_off: clothing.yaml
+licking: movements.yaml
+blowjob: movements.yaml

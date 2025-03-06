@@ -7,8 +7,7 @@ undress:
         体感: +2
         开放: +5
       clothing:
-        chosenClothing:
-          isWorn: false
+        chosenCloth: remove
     actor:
       bodyParts:
         actBodyPart:
@@ -16,13 +15,13 @@ undress:
   description:
     start:
     # TODO: 用event来处理被脱完衣服target的不同反应
-      - "{actor}轻轻地解开{target}的{chosenClothing}，{target}的身体逐渐暴露在{actor}的面前，他不由自主地蜷起身子。"
-      - "{actor}一边熟练地脱下{target}的{chosenClothing}，一边哄着他配合自己。{target}的表情有点迷离，顺从地任凭{actor}将{chosenClothing}剥离自己的身体。"
+      - "{actor}轻轻地解开{target}的{chosenCloth}，{target}的身体逐渐暴露在{actor}的面前，他不由自主地蜷起身子。"
+      - "{actor}一边熟练地脱下{target}的{chosenCloth}，一边哄着他配合自己。{target}的表情有点迷离，顺从地任凭{actor}将{chosenCloth}剥离自己的身体。"
   conditions:
       all:
         - type: "clothing"
           owner: "target"
-          clothing: "{chosenClothing}"
+          clothing: "{chosenCloth}"
           isWorn: true
       any:
         - type: "bodyPart"
@@ -46,16 +45,15 @@ take_off:
       state:
         体感: +2
       clothing:
-        chosenClothing:
-          isWorn: false
+        chosenCloth: remove
   description:
     start:
-      - "{actor}感到燥热，伸手把{chosenClothing}从自己身上脱下。{actor}的身体暴露在{target}面前，他似乎不想无礼地盯着看，但又忍不住偷偷瞄过来。"
+      - "{actor}感到燥热，伸手把{chosenCloth}从自己身上脱下。{actor}的身体暴露在{target}面前，他似乎不想无礼地盯着看，但又忍不住偷偷瞄过来。"
   conditions:
       all:
         - type: "clothing"
           owner: "actor"
-          clothing: "{chosenClothing}"
+          clothing: "{chosenCloth}"
           isWorn: true
       any:
         - type: "bodyPart"
