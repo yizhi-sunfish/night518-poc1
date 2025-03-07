@@ -1,6 +1,9 @@
 caress:
   name: "爱抚"
   canContinue: true
+  possibleBodyParts:
+    - 左手
+    - 右手
   effects:
     target:
       state:
@@ -33,6 +36,8 @@ caress:
 licking:
   name: "舔舐"
   canContinue: true
+  possibleBodyParts:
+    - 嘴
   effects:
     target:
       state:
@@ -67,6 +72,8 @@ licking:
 blowjob:
   name: "口交"
   canContinue: true
+  possibleBodyParts:
+    - 嘴
   effects:
     target:
       state:

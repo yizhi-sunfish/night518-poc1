@@ -1,6 +1,8 @@
 gentle_kiss:
   name: "轻吻"
   canContinue: false
+  possibleBodyParts:
+    - 嘴
   effects:
     target:
       state:
@@ -26,6 +28,8 @@ gentle_kiss:
 deep_kiss:
   name: "深入亲吻"
   canContinue: true
+  possibleBodyParts:
+    - 嘴
   effects:
     target:
       state:

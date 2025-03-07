@@ -14,6 +14,7 @@ class Action:
                 raise ValueError(f"ERROR: Action with id {id} not found in {yamlPath}")
             self.name = action_data.get('name', self.id)
             self.canContinue = action_data.get('canContinue', False)
+            self.possibleBodyParts = action_data.get('possibleBodyParts', [])
             self.effects = action_data.get('effects', {})
             self.conditions = action_data.get('conditions', {})
             self.description = action_data.get('description',{'start':''})

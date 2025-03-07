@@ -1,6 +1,9 @@
 undress:
   name: "褪去{chosenCloth}"
   canContinue: true
+  possibleBodyParts:
+    - 左手
+    - 右手
   effects:
     target:
       state:
@@ -40,6 +43,9 @@ undress:
 take_off:
   name: "脱下{chosenCloth}"
   canContinue: true
+  possibleBodyParts:
+    - 左手
+    - 右手
   effects:
     target:
       state:

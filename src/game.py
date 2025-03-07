@@ -16,9 +16,14 @@ class Game:
         self.ui.display_result(self.result)
         Event.check_triggers(self.partner)
         self.ui.display_status(self.partner)
+        self.result = ""
         action = self.ui.get_action_choice(self.player, self.partner)
         self.result = action.execute()
         self.player.updateHistory(action)
+        #actions = self.ui.get_multiple_actions(self.player, self.partner)
+        #for action in actions:
+        #    self.result += action.execute()
+        #    self.result += '\n'
         
         # 终止条件
         if self.partner.state["性欲"] >= 100:

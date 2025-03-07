@@ -1,6 +1,8 @@
 express_love:
   name: "表达爱意"
   canContinue: false
+  possibleBodyParts:
+    - 嘴
   effects:
     target:
       state:
@@ -26,6 +28,8 @@ express_love:
 scold:
   name: "责骂"
   canContinue: false
+  possibleBodyParts:
+    - 嘴
   effects:
     target:
       state:
