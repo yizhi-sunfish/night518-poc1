@@ -10,6 +10,7 @@ class Character(ABC):
         with open(character_file, 'r') as file:
             data = yaml.load(file, Loader=yaml.FullLoader)
         self.name = data.get('name','')
+        self.nickname = data.get('nickname','')
         self.state = (data.get('state', {}))
         self.bodyParts = data.get('bodyParts', {})
         self.clothing = data.get('clothing', {})
@@ -61,8 +62,11 @@ class Character(ABC):
         if not self.clothing[cloth]:
             print(f"{byWhom.name} 无法脱下 {self.name} 的 {cloth.name}")
         else:
-            for part in self.clothing[cloth]["covers"].split():
-                self.change_bodyPart(part, False, False) # TODO: 重构
+            if isinstance(self.clothing[cloth]["covers"], str):
+                self.change_bodyPart(self.clothing[cloth]["covers"], False, False)
+            elif isinstance(self.clothing[cloth]["covers"], list):
+                for part in self.clothing[cloth]["covers"]:
+                    self.change_bodyPart(part, False, False)
             self.clothing.pop(cloth)
     
     def updateHistory(self, action):

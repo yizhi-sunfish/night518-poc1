@@ -25,7 +25,7 @@ class Action:
 
     def __str__(self):
         # TODO: 仍需完善。这会用在历史记录里。
-        return f"{self.actor.name} {self.name} {self.chosenCloth if hasattr(self, 'chosenCloth') else self.target.name}"
+        return f"{self.actor.name} {self.name} {self.chosenCloth if self.chosenCloth else self.target.name}"
 
     def can_execute(self):
         """检查行动是否可执行"""
@@ -38,8 +38,11 @@ class Action:
             owner = self.actor if condition['owner'] == 'actor' else self.target
             if condition['type'] == 'bodyPart':
                 body_part = condition['bodyPart']
-                is_occupied = condition['isOccupied']
-                if owner.bodyParts[body_part]['isOccupied'] != is_occupied:
+                is_occupied = condition.get('isOccupied')
+                is_covered = condition.get('isCovered')
+                if is_occupied is not None and owner.bodyParts[body_part].get('isOccupied') != is_occupied:
+                    all = False
+                if is_covered is not None and owner.bodyParts[body_part].get('isCovered') != is_covered:
                     all = False
             elif condition['type'] == 'state':
                 state = condition['state']
@@ -79,6 +82,7 @@ class Action:
         
         if not self.conditions.get('any', []):
             any = True
+        #print("all = {}, any = {}".format(all,any))
         return all and any
     
     def execute(self):
@@ -113,18 +117,21 @@ class Action:
                     # 执行脱衣操作
                     if action == "remove":
                         affected_character.remove_clothing(self.target, cloth_name)
-            # 处理start效果
-            print(self.description)
-            if "start" in self.description:
-                start_desc = self.description["start"]
-                if isinstance(start_desc, list):
-                    chosen_desc = random.choice(start_desc)
-                    print(f"Start description chosen: {chosen_desc}")
-                    return chosen_desc.format(actor=self.actor.name,target=self.target.name)
-                else:
-                    print(f"Start effect: {start_desc}")
-                    return [start_desc]
-            return []
+        # 处理start效果
+        if "start" in self.description:
+            start_desc = self.description["start"]
+            if isinstance(start_desc, list):
+                chosen_desc = random.choice(start_desc)
+                return chosen_desc.format(actor=self.actor.name,
+                                            target=self.target.name,
+                                            chosenCloth=self.chosenCloth,
+                                            actorNickname=self.actor.nickname,
+                                            actBodyPart=self.actBodyPart,
+                                            targetBodyPart=self.targetBodyPart
+                                            )
+            else:
+                return [start_desc]
+        return []
     
     def get_effects(self):
         """根据self.effects生成行动效果文本"""

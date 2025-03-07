@@ -16,13 +16,16 @@ class UI:
         with open('data/actions/index.yaml', 'r', encoding='utf-8') as file:
             actions_data = yaml.safe_load(file)
         actions = [Action(id, 'data/actions/'+file_name, player, partner) for id, file_name in actions_data.items()]
+        # TODO：目前先手动加入脱衣选项，之后再想怎么更好地实现
+        actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner,'右手',None,'白色背心'))
+        actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner,'左手',None,'四角内裤'))
         
         print("\n可选行动:")
         j = 0
         map = [0] * len(actions)
         for i, action in enumerate(actions):
             if action.can_execute():
-                print(f"{j + 1}. {action.name}")
+                print(f"{j + 1}. {action.name.format(chosenCloth="衣物")}")
                 map[j] = i
                 j += 1
         choice = int(input("选择行动 (输入编号): ")) - 1

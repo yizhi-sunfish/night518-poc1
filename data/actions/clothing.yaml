@@ -1,5 +1,5 @@
 undress:
-  name: "脱衣"
+  name: "褪去{chosenCloth}"
   canContinue: true
   effects:
     target:
@@ -23,6 +23,10 @@ undress:
           owner: "target"
           clothing: "{chosenCloth}"
           isWorn: true
+        - type: "state"
+          owner: "target"
+          state: "开放"
+          min: 30
       any:
         - type: "bodyPart"
           owner: "actor"
@@ -34,7 +38,7 @@ undress:
           isOccupied: false
 
 take_off:
-  name: "脱下"
+  name: "脱下{chosenCloth}"
   canContinue: true
   effects:
     target:
