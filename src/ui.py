@@ -8,15 +8,17 @@ class UI:
         print(f"\n==== {character.name} 的状态 ====")
         for key, value in character.state.items():
             print(f"{key}: {value}")
-    def get_init_action_list(self, player, partner):
 
+    def get_init_action_list(self, player, partner):
         with open('data/actions/index.yaml', 'r', encoding='utf-8') as file:
             self.actions_index_data = yaml.safe_load(file)
         self.init_actions = [Action(id, 'data/actions/' + file_name, player, partner, 'start') for id, file_name in self.actions_index_data.items()]
         
         # 额外加入脱衣选项
-        self.init_actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner, 'start', '右手', None, '白色背心'))
-        self.init_actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner, 'start', '左手', None, '四角内裤'))
+        self.init_actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner, 'start', None, None, '白色背心'))
+        self.init_actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner, 'start', None, None, '四角内裤'))
+        self.init_actions.append(Action('take_off', 'data/actions/clothing.yaml', player, partner, 'start', None, None, '高领紧身衣'))
+        self.init_actions.append(Action('take_off', 'data/actions/clothing.yaml', player, partner, 'start', None, None, '黑色短裤'))
 
     # deprecated
     def get_single_choice(self, player, partner):
@@ -97,7 +99,7 @@ class UI:
                     if num == n and body_part == part:
                         act.set_actBodyPart(body_part)
                         action_index_map[idx] = (num, act, body_part)
-            action_texts = [f"{num}. {action.name.format(chosenCloth='衣物')}" for num, action in actions_list]
+            action_texts = [f"{num}. {action.name.format(player=player.name,partner=partner.name,chosenCloth=action.chosenCloth)}" for num, action in actions_list]
             if action_texts:
                 print(f"【{body_part}】 " + "  ".join(action_texts))
 

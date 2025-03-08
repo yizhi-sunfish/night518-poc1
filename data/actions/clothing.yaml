@@ -1,5 +1,5 @@
 undress:
-  name: "褪去{chosenCloth}"
+  name: "褪去{partner}的{chosenCloth}"
   isContinuous: false
   possibleBodyParts:
     - 左手
@@ -37,7 +37,7 @@ undress:
           isOccupied: false
 
 take_off:
-  name: "脱下{chosenCloth}"
+  name: "脱下{player}的{chosenCloth}"
   isContinuous: false
   possibleBodyParts:
     - 左手
