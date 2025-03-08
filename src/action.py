@@ -2,18 +2,19 @@ import yaml
 import random
 
 class Action:
-    def __init__(self, id, yamlPath, actor, target, actBodyPart=None, targetBodyPart=None, chosenCloth=None):
+    def __init__(self, id, yamlPath, actor, target, state='start', actBodyPart=None, targetBodyPart=None, chosenCloth=None):
         # 从yamlPath中找到id
         self.id = id
         self.actor = actor
         self.target = target
+        self.state = state
         with open(yamlPath, 'r', encoding='utf-8') as file:
             data = yaml.safe_load(file)
             action_data = data.get(id)
             if action_data is None:
                 raise ValueError(f"ERROR: Action with id {id} not found in {yamlPath}")
             self.name = action_data.get('name', self.id)
-            self.canContinue = action_data.get('canContinue', False)
+            self.isContinuous = action_data.get('isContinuous', False)
             self.possibleBodyParts = action_data.get('possibleBodyParts', [])
             self.effects = action_data.get('effects', {})
             self.conditions = action_data.get('conditions', {})
@@ -26,7 +27,7 @@ class Action:
 
     def __str__(self):
         # TODO: 仍需完善。这会用在历史记录里。
-        return f"{self.actor.name} {self.name} {self.chosenCloth if self.chosenCloth else self.target.name}"
+        return f"{self.actor.name} 用 {self.actBodyPart} {self.name} {self.chosenCloth if self.chosenCloth else self.target.name}"
 
     def can_execute(self):
         """检查行动是否可执行"""
@@ -41,7 +42,7 @@ class Action:
                 body_part = condition['bodyPart']
                 is_occupied = condition.get('isOccupied')
                 is_covered = condition.get('isCovered')
-                if is_occupied is not None and owner.bodyParts[body_part].get('isOccupied') != is_occupied:
+                if is_occupied is not None and owner.bodyParts[body_part].get('isOccupied') != is_occupied and owner.bodyParts[body_part].get('currentAction') != self.id:
                     all = False
                 if is_covered is not None and owner.bodyParts[body_part].get('isCovered') != is_covered:
                     all = False
@@ -66,7 +67,7 @@ class Action:
             if condition['type'] == 'bodyPart':
                 body_part = condition['bodyPart']
                 is_occupied = condition['isOccupied']
-                if owner.bodyParts.get(body_part, {}).get('isOccupied', None) == is_occupied:
+                if owner.bodyParts.get(body_part, {}).get('isOccupied', None) == is_occupied or owner.bodyParts[body_part].get('currentAction') == self.id:
                     any = True
             elif condition['type'] == 'state':
                 state = condition['state']
@@ -90,7 +91,7 @@ class Action:
         if not self.can_execute():
             print("行动无法执行，执行中断。")
             return  # Add a return statement to handle the case when the action cannot be executed
-            
+        
         # TODO: 区别处理target和actor
         for role, changes in self.effects.items():
             if role == "actor":
@@ -117,12 +118,29 @@ class Action:
 
                     # 执行脱衣操作
                     if action == "remove":
+                        print("chara from action:")
+                        print(affected_character)
                         affected_character.remove_clothing(self.target, cloth_name)
-        # 处理start效果
-        if "start" in self.description:
-            start_desc = self.description["start"]
-            if isinstance(start_desc, list):
-                chosen_desc = random.choice(start_desc)
+            if "bodyParts" in changes:
+                for part, effect in changes["bodyParts"].items():
+                    if part == "actBodyPart":
+                        if self.actBodyPart:
+                            part = self.actBodyPart
+                        else:
+                            continue
+                    #print("current action state:"+self.state)
+                    if self.state == 'start':
+                        #print("即将占用身体部位"+part)
+                        affected_character.occupy_bodyPart(part,self.id)
+                    elif self.state == 'end':
+                        #print("即将解放身体部位"+part)
+                        affected_character.release_bodyPart(part)                    
+        
+        # 处理返回文本
+        if self.state in self.description:
+            desc = self.description[self.state]
+            if isinstance(desc, list):
+                chosen_desc = random.choice(desc)
                 return chosen_desc.format(actor=self.actor.name,
                                             target=self.target.name,
                                             chosenCloth=self.chosenCloth,
@@ -131,7 +149,7 @@ class Action:
                                             targetBodyPart=self.targetBodyPart
                                             )
             else:
-                return [start_desc]
+                return [desc]
         return []
     
     def get_effects(self):

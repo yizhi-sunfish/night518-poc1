@@ -1,24 +1,32 @@
 from action import Action
 import os
 import yaml
+import copy
 
 class UI:
     def display_status(self, character):
         print(f"\n==== {character.name} 的状态 ====")
         for key, value in character.state.items():
             print(f"{key}: {value}")
+    def get_init_action_list(self, player, partner):
 
-    def get_action_choice(self, player, partner):
-        """获取玩家选择的行动"""
-        #TODO: 从文件读取行动列表
-        #TODO: 支持多个不冲突的行动
-        #TODO: 更合理的可选行动布局
         with open('data/actions/index.yaml', 'r', encoding='utf-8') as file:
-            actions_data = yaml.safe_load(file)
-        actions = [Action(id, 'data/actions/'+file_name, player, partner) for id, file_name in actions_data.items()]
+            self.actions_index_data = yaml.safe_load(file)
+        self.init_actions = [Action(id, 'data/actions/' + file_name, player, partner, 'start') for id, file_name in self.actions_index_data.items()]
+        
+        # 额外加入脱衣选项
+        self.init_actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner, 'start', '右手', None, '白色背心'))
+        self.init_actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner, 'start', '左手', None, '四角内裤'))
+
+    # deprecated
+    def get_single_choice(self, player, partner):
+        """获取玩家选择的行动"""
+        with open('data/actions/index.yaml', 'r', encoding='utf-8') as file:
+            self.actions_index_data = yaml.safe_load(file)
+        actions = [Action(id, 'data/actions/'+file_name, player, partner, 'start') for id, file_name in self.actions_index_data.items()]
         # TODO：目前先手动加入脱衣选项，之后再想怎么更好地实现
-        actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner,'右手',None,'白色背心'))
-        actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner,'左手',None,'四角内裤'))
+        actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner, 'start', '右手',None,'白色背心'))
+        actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner, 'start', '左手',None,'四角内裤'))
         
         print("\n可选行动:")
         j = 0
@@ -32,54 +40,66 @@ class UI:
         return actions[map[choice]]
     
     def get_multiple_actions(self, player, partner):
-        
-        with open('data/actions/index.yaml', 'r', encoding='utf-8') as file:
-            actions_data = yaml.safe_load(file)
-        actions = [Action(id, 'data/actions/' + file_name, player, partner) for id, file_name in actions_data.items()]
-        
-        # 额外加入脱衣选项
-        actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner, '右手', None, '白色背心'))
-        actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner, '左手', None, '四角内裤'))
-        
+        if not hasattr(self,'init_action_list'):
+            self.get_init_action_list(player, partner)
         # 存储按身体部位分类的可执行动作
         available_actions = {}
         action_index_map = []
         j = 0  # 仅计算可执行的选项编号
-        
-        # 遍历所有行动，将它们按 actBodyPart 分类
-        for i, action in enumerate(actions):
-            if not action.can_execute():
-                continue  # 过滤不可执行的动作
 
-            
-            # 获取该 action 可以在哪些部位执行（可能是单个字符串或列表）
-            possible_parts = action.possibleBodyParts if isinstance(action.possibleBodyParts, list) else [action.possibleBodyParts]
-            
-            # 选择一个可用的身体部位
-            chosen_parts = []
-            for part in possible_parts:
-                if part in partner.bodyParts:  # 确保该部位可用
-                    chosen_parts.append(part)
-            
-            if not chosen_parts:  # 如果没有找到合适的部位，跳过
-                continue
+        # 遍历玩家可用的身体部位
+        # 在每个loop，查询当前身体部位是否被占用，如是，加入停止动作
+        # 如否，查询当前部位可用动作
+        for part in player.bodyParts:
+            if part not in available_actions:
+                available_actions[part] = []
+            if player.bodyParts[part]['isOccupied']:
+                # 加入继续和停止的动作
+                path = {id:path for id, path in self.actions_index_data.items() if id == player.bodyParts[part]['currentAction']}
+                continue_action = Action(player.bodyParts[part]['currentAction'], 'data/actions/' + path[player.bodyParts[part]['currentAction']],player,partner,'continue')
+                end_action = Action(player.bodyParts[part]['currentAction'], 'data/actions/' + path[player.bodyParts[part]['currentAction']],player,partner,'end') 
+                continue_action.name = "继续" + continue_action.name
+                end_action.name = "停止" + end_action.name
+                available_actions[part].append((j + 1, continue_action))
+                action_index_map.append((j + 1, continue_action, part))
+                available_actions[part].append((j + 2, end_action))
+                action_index_map.append((j + 2, end_action, part))
+                j += 2
+            else:
+                for i, action in enumerate(self.init_actions):
+                    # 过滤不可执行的动作
+                    if not action.can_execute():
+                        continue  
+                    possible_parts = action.possibleBodyParts if isinstance(action.possibleBodyParts, list) else [action.possibleBodyParts]
+                    if part not in possible_parts:
+                        continue
 
-            # 分类存储可用动作
-            for chosen_part in chosen_parts:
-                if chosen_part not in available_actions:
-                    available_actions[chosen_part] = []
-                available_actions[chosen_part].append((j + 1, action))
-                action_index_map.append((j + 1, action, chosen_part))  # 记录编号、动作、身体部位
-                j += 1
+                    # 处理可执行的动作
+                    if part not in available_actions:
+                        available_actions[part] = []
+                    action_copy = copy.deepcopy(action)
+                    action_copy.actor = action.actor
+                    action_copy.target = action.target
+                    available_actions[part].append((j + 1, action_copy))
+                    action_index_map.append((j + 1, action_copy, part))  # 记录编号、动作、身体部位
+                    j += 1                
 
         # 显示可选行动
+        for part, action_ids in available_actions.items():
+            for action_id in action_ids:
+                (id, paction) = action_id
+
         print("\n可选行动:")
         for body_part, actions_list in available_actions.items():
             # 为每个action设置actBodyPart
             for num, action in actions_list:
-                action.set_actBodyPart(body_part)
+                for idx, (n, act, part) in enumerate(action_index_map):
+                    if num == n and body_part == part:
+                        act.set_actBodyPart(body_part)
+                        action_index_map[idx] = (num, act, body_part)
             action_texts = [f"{num}. {action.name.format(chosenCloth='衣物')}" for num, action in actions_list]
-            print(f"【{body_part}】 " + "  ".join(action_texts))
+            if action_texts:
+                print(f"【{body_part}】 " + "  ".join(action_texts))
 
         # 让玩家输入多个编号
         choices = input("\n选择多个行动（用空格分隔编号，例如：1 3 5）: ").split()

@@ -1,6 +1,6 @@
 gentle_kiss:
   name: "轻吻"
-  canContinue: false
+  isContinuous: false
   possibleBodyParts:
     - 嘴
   effects:
@@ -27,7 +27,7 @@ gentle_kiss:
 
 deep_kiss:
   name: "深入亲吻"
-  canContinue: true
+  isContinuous: true
   possibleBodyParts:
     - 嘴
   effects:
@@ -36,8 +36,6 @@ deep_kiss:
         性欲: +5
         体感: +5
         开放: +5
-  #      clothing:
-  #        None
       bodyParts:
         嘴:
           isOccupied: true

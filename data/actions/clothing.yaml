@@ -1,6 +1,6 @@
 undress:
   name: "褪去{chosenCloth}"
-  canContinue: true
+  isContinuous: false
   possibleBodyParts:
     - 左手
     - 右手
@@ -11,13 +11,9 @@ undress:
         开放: +5
       clothing:
         chosenCloth: remove
-    actor:
-      bodyParts:
-        actBodyPart:
-          isOccupied: true
   description:
     start:
-    # TODO: 用event来处理被脱完衣服target的不同反应
+      # TODO: 用event来处理被脱完衣服target的不同反应
       - "{actor}轻轻地解开{target}的{chosenCloth}，{target}的身体逐渐暴露在{actor}的面前，他不由自主地蜷起身子。"
       - "{actor}一边熟练地脱下{target}的{chosenCloth}，一边哄着他配合自己。{target}的表情有点迷离，顺从地任凭{actor}将{chosenCloth}剥离自己的身体。"
   conditions:
@@ -42,7 +38,7 @@ undress:
 
 take_off:
   name: "脱下{chosenCloth}"
-  canContinue: true
+  isContinuous: false
   possibleBodyParts:
     - 左手
     - 右手

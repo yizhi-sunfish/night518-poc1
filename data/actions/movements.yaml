@@ -1,6 +1,6 @@
 caress:
   name: "爱抚"
-  canContinue: true
+  isContinuous: true
   possibleBodyParts:
     - 左手
     - 右手
@@ -35,7 +35,7 @@ caress:
 
 licking:
   name: "舔舐"
-  canContinue: true
+  isContinuous: true
   possibleBodyParts:
     - 嘴
   effects:
@@ -71,7 +71,7 @@ licking:
 
 blowjob:
   name: "口交"
-  canContinue: true
+  isContinuous: true
   possibleBodyParts:
     - 嘴
   effects:
@@ -90,7 +90,7 @@ blowjob:
     continue:
       - "{actor}熟练地用嘴巴套弄着{target}的鸡巴。它个头很大，强迫{actor}张大嘴巴，下巴都有些发酸。但{actor}并不介意，{actor}享受着{target}的反应，享受着这种被动的快感。"
       - "阴茎在{actor}的嘴里进进出出，{actor}故意让它发出咕啾咕啾的声音，本就淫荡的行为因此变得更加刺激。{target}显然也听到了，{actor}能看到他的耳朵变得通红。"
-      - “{actorNickname}，{actorNickname}，我……我好舒服……”{target}的声音破碎又凌乱，“啊啊……”他刻意压低呻吟声，不让声音传出这个房间。但这让{actor}更加兴奋，加快了吞吐的节奏。"
+      - "{actorNickname}，{actorNickname}，我……我好舒服……”{target}的声音破碎又凌乱，“啊啊……”他刻意压低呻吟声，不让声音传出这个房间。但这让{actor}更加兴奋，加快了吞吐的节奏。"
     end:
       - "{actor}突然停下了口中的动作，抬头吐出了{target}的阴茎看向他。他的阴茎还处于勃起的状态，湿润而红润，他的眼睛里满是欲望。\n“为什么……”他脱口而出，“为什么要停下来？”但他没有继续说下去，为自己主动的索取而感到羞愧。"
   conditions:

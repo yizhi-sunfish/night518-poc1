@@ -40,8 +40,8 @@ bodyParts:
 clothing:
   高领紧身衣:
     covers:
-      胸部
+      - 胸部
   黑色短裤:
     covers:
-      阴茎
-      臀部
+      - 阴茎
+      - 臀部

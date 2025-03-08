@@ -47,11 +47,17 @@ class Character(ABC):
         return self.bodyParts[key]["isCovered"]
     
     # TODO: 重构，使函数更加通用合理
-    def change_bodyPart(self, key, isOccupied, isCovered):
+    def update_bodyPart(self, key, isOccupied=None, isCovered=None, currentAction=None):
         """修改角色身体部位状态"""
         if key in self.bodyParts:
-            self.bodyParts[key]["isOccupied"] = isOccupied
-            self.bodyParts[key]["isCovered"] = isCovered
+            if isOccupied != None:
+                self.bodyParts[key]["isOccupied"] = isOccupied
+            if isCovered != None:
+                self.bodyParts[key]["isCovered"] = isCovered
+            if currentAction != None:
+                self.bodyParts[key]["currentAction"] = currentAction
+            print("after undressing:")
+            print(self.bodyParts)
         else:
             print(f"身体部位 {key} 不存在")
 
@@ -63,11 +69,27 @@ class Character(ABC):
             print(f"{byWhom.name} 无法脱下 {self.name} 的 {cloth.name}")
         else:
             if isinstance(self.clothing[cloth]["covers"], str):
-                self.change_bodyPart(self.clothing[cloth]["covers"], False, False)
+                self.update_bodyPart(self.clothing[cloth]["covers"], False, False)
             elif isinstance(self.clothing[cloth]["covers"], list):
                 for part in self.clothing[cloth]["covers"]:
-                    self.change_bodyPart(part, False, False)
+                    self.update_bodyPart(part, None, False)
             self.clothing.pop(cloth)
+
+    def occupy_bodyPart(self, bodyPart, action):
+        if self.bodyParts[bodyPart]['isOccupied'] == True:
+            print(bodyPart + "已被占用，当前动作：" + self.bodyParts[bodyPart]['currentAction'])
+            return False
+        else:
+            self.bodyParts[bodyPart]['isOccupied'] = True
+            self.bodyParts[bodyPart]['currentAction'] = action
+            return True
+    
+    def release_bodyPart(self, bodyPart):
+        if self.bodyParts[bodyPart]['isOccupied'] == False:
+            print(bodyPart + "空闲")
+        else:
+            self.bodyParts[bodyPart]['isOccupied'] = False
+            self.bodyParts[bodyPart]['currentAction'] = ''        
     
     def updateHistory(self, action):
         self.history.append(action)
