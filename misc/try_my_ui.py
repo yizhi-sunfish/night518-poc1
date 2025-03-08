@@ -36,9 +36,9 @@ def show_status():
     table2.add_row("性欲", progress_bar(60, color="magenta"))
     table2.add_row("体感", progress_bar(20, color="green"))
     table2.add_row("精神", progress_bar(20, color="blue"))
-    table2.add_row("专注", progress_bar(100, color="white"))
+    table2.add_row("专注", progress_bar(100, color="grey"))
 
-    console.print(Columns([table1, table2]))
+    console.print(Columns([table2, table1], equal=True, expand=True, align="center"))
 
 # 动作选择
 def show_actions():
@@ -53,7 +53,7 @@ def show_actions():
 # 逐字显示文本（打字机效果）
 def typewriter(text, delay=0.02):
     for char in text:
-        console.print(char, end="", style="bold magenta", highlight=False)
+        console.print(char, end="", style="bold red", highlight=False)
         time.sleep(delay)
     console.print()
 
@@ -63,7 +63,7 @@ def typewriter_panel(text, delay=0.06):
     with Live(refresh_per_second=10) as live:
         for char in text:
             displayed_text += char
-            panel = Panel(Text(displayed_text, style="bold"), border_style="magenta")
+            panel = Panel(Text(displayed_text), border_style="magenta")
             live.update(panel)
             time.sleep(delay)  # 逐字延迟
 
@@ -79,6 +79,7 @@ def render():
 
 你继续爱抚着佐音的身体，佐音的脸上泛起了一丝红晕，他的眼睛里闪烁着期待的光芒。
 """)
+    typewriter("佐音看起来有些不安，你也许应该温柔一点")
     time.sleep(0.5)
     show_actions()
     console.print("选择多个行动（用空格分隔编号，例如：1 3 5）: ")
