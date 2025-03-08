@@ -138,3 +138,13 @@ class Action:
         """根据self.effects生成行动效果文本"""
         # TODO
         return self.effects
+
+    def set_actBodyPart(self, part):
+        self.actBodyPart = part
+
+    def set_targetBodyPart(self, part):
+        self.targetBodyPart = part
+    
+    def set_chosenCloth(self, cloth):
+        self.chosenCloth = cloth
+
