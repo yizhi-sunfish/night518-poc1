@@ -27,7 +27,7 @@ class Action:
 
     def __str__(self):
         # TODO: 仍需完善。这会用在历史记录里。
-        return f"{self.actor.name} 用 {self.actBodyPart} {self.name} {self.chosenCloth if self.chosenCloth else self.target.name}"
+        return f"{self.actor.name} 用 {self.actBodyPart} {self.name}"
 
     def can_execute(self):
         """检查行动是否可执行"""
@@ -42,7 +42,17 @@ class Action:
                 body_part = condition['bodyPart']
                 is_occupied = condition.get('isOccupied')
                 is_covered = condition.get('isCovered')
-                if is_occupied is not None and owner.bodyParts[body_part].get('isOccupied') != is_occupied and owner.bodyParts[body_part].get('currentAction') != self.id:
+                # TODO: logic is poor, needs refactor
+                if is_occupied is not None \
+                    and owner.bodyParts[body_part].get('isOccupied') != is_occupied \
+                    and owner.bodyParts[body_part].get('currentAction') != self.id:
+                    all = False
+                # Currently adding this elif for checking the 2nd round. 
+                # Needs refactor.
+                elif is_occupied is not None \
+                    and self.actBodyPart is not None \
+                    and owner.bodyParts[body_part].get('isOccupied') != is_occupied \
+                    and owner.bodyParts[body_part].get('OccupiedByBodyPart') != self.actBodyPart:
                     all = False
                 if is_covered is not None and owner.bodyParts[body_part].get('isCovered') != is_covered:
                     all = False
@@ -131,7 +141,7 @@ class Action:
                     #print("current action state:"+self.state)
                     if self.state == 'start':
                         #print("即将占用身体部位"+part)
-                        affected_character.occupy_bodyPart(part,self.id)
+                        affected_character.occupy_bodyPart(part,self.id,self.actBodyPart)
                     elif self.state == 'end':
                         #print("即将解放身体部位"+part)
                         affected_character.release_bodyPart(part)                    

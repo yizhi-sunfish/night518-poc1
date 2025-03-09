@@ -23,15 +23,15 @@ caress:
     end:
       - "{actor}的{actBodyPart}不再抚摸{target}的身体，{target}的脸上依然残留着红晕，他的眼睛里闪过一丝失落。"
   conditions:
-      any:
-        - type: "bodyPart"
-          owner: "actor"
-          bodyPart: "左手"
-          isOccupied: false
-        - type: "bodyPart"
-          owner: "actor"
-          bodyPart: "右手"
-          isOccupied: false
+    any:
+      - type: "bodyPart"
+        owner: "actor"
+        bodyPart: "左手"
+        isOccupied: false
+      - type: "bodyPart"
+        owner: "actor"
+        bodyPart: "右手"
+        isOccupied: false
 
 licking:
   name: "舔舐"
@@ -69,6 +69,60 @@ licking:
         bodyPart: "嘴"
         isOccupied: false
 
+handjob:
+  name: "撸动{partner}的阴茎"
+  isContinuous: true
+  possibleBodyParts:
+    - 左手
+    - 右手
+  effects:
+    target:
+      state:
+        性欲: +15
+        体感: +10
+        开放: +10
+      bodyParts:
+        阴茎:
+          isOccupied: true 
+          #TODO: not correctly triggered
+    actor:
+      bodyParts:
+        actBodyPart:
+          isOccupied: true
+  description:
+    start:
+      - "{actor}伸出{actBodyPart}去抚摸{target}的阴茎。{actor}能感觉到那里似乎比往常还要硬，{actor}捏了捏，让{target}发出一声闷哼。\n{actor}温柔地绕着柱身摸了一圈，然后有节奏地上下撸动起来。"
+    continue:
+      - "{actor}熟悉{target}的身体，当然也包括他的阴茎。{actor}灵巧的手指触动着每一个他有感觉的地方，很快，前精从他的铃口溢出，可爱极了。"
+      - "{actor}握住{target}的龟头，用手指肚在马口处按摩，并时不时尝试探入。这种更像是在折磨的行为让{target}发出介于痛苦和快乐之间的呻吟。"
+      - "“{actorNickname}……你的手，真漂亮……”{target}呢喃着望向{actor}触碰着他的手，{actor}能看出他无比享受{actor}手上的动作，这也让{actor}欣喜若狂。"
+    end:
+      - "{actor}把{actBodyPart}从{target}的阴茎上放开，{target}张张嘴想说什么，但是忍住了。他的阴茎在{actor}的刺激之下高昂着头。"
+  conditions:
+    all:
+      - type: "state"
+        owner: target
+        state: "开放"
+        min: 50
+      - type: "state"
+        owner: target
+        state: "性欲"
+        min: 50
+      - type: "bodyPart"
+        owner: target
+        bodyPart: "阴茎"
+        isOccupied: false
+        isCovered: false
+    any:
+      - type: "bodyPart"
+        owner: "actor"
+        bodyPart: "左手"
+        isOccupied: false
+      - type: "bodyPart"
+        owner: "actor"
+        bodyPart: "右手"
+        isOccupied: false
+
 blowjob:
   name: "口交"
   isContinuous: true
@@ -80,6 +134,9 @@ blowjob:
         性欲: +10
         体感: +10
         开放: +10
+      bodyParts:
+        阴茎:
+          isOccupied: true
     actor:
       bodyParts:
         嘴:

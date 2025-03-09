@@ -75,13 +75,14 @@ class Character(ABC):
                     self.update_bodyPart(part, None, False)
             self.clothing.pop(cloth)
 
-    def occupy_bodyPart(self, bodyPart, action):
+    def occupy_bodyPart(self, bodyPart, action, actBodyPart):
         if self.bodyParts[bodyPart]['isOccupied'] == True:
             print(bodyPart + "已被占用，当前动作：" + self.bodyParts[bodyPart]['currentAction'])
             return False
         else:
             self.bodyParts[bodyPart]['isOccupied'] = True
             self.bodyParts[bodyPart]['currentAction'] = action
+            self.bodyParts[bodyPart]['OccupiedByBodyPart'] = actBodyPart
             return True
     
     def release_bodyPart(self, bodyPart):

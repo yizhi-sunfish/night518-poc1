@@ -45,7 +45,7 @@ take_off:
   effects:
     target:
       state:
-        性欲: +2
+        性欲: +5
         开放: +5
     actor:
       state:

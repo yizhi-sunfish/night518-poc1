@@ -1,6 +1,7 @@
 from character import Character
 from event import Event
 from ui import UI
+import time
 
 class Game:
     def __init__(self):
@@ -23,22 +24,20 @@ class Game:
         print(self.partner.clothing)
         '''
         self.ui.clean_screen()
-        print("======回合开始======")
-        self.ui.display_result(self.result)
+        self.ui.display_status(self.player, self.partner)
+        time.sleep(0.5)
+        self.ui.typewriter_panel(self.result)
         Event.check_triggers(self.player, self.partner)
-        self.ui.display_status(self.partner)
-        self.result = ""
-        #### single action
-        # action = self.ui.get_action_choice(self.player, self.partner)
-        # self.result = action.execute()
-        # self.player.updateHistory(action)
-        #### multiple actions
+        time.sleep(0.5)
         actions = self.ui.get_multiple_actions(self.player, self.partner)
+        self.result = ""
+        last_action = actions[-1]
         for action in actions:
             result = action.execute()
             if result is not None:
                 self.result += result
-                self.result += '\n'
+                if action != last_action:
+                    self.result += '\n\n'
             self.player.updateHistory(action)
         # 终止条件
         if self.partner.state["性欲"] >= 100:
