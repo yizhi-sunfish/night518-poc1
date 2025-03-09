@@ -21,7 +21,7 @@ def show_dialogue(text):
 
 # 角色状态栏
 def show_status():
-    table1 = Table(title="[bold blue]佐音 状态[/]", header_style="bold blue")
+    table1 = Table(title="[bold cyan]佐音 状态[/]", header_style="bold cyan")
     table1.add_column("属性", justify="center")
     table1.add_column("数值", justify="center")
 
@@ -70,6 +70,7 @@ def typewriter_panel(text, delay=0.06):
 # 渲染界面
 def render():
     console.clear()
+    console.print("")
     show_status()
     time.sleep(0.5)
     #show_dialogue(

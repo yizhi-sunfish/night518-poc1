@@ -1,6 +1,4 @@
 from abc import ABC, abstractmethod
-from action import Action
-from clothing import Clothing
 import yaml
 
 class Character(ABC):
