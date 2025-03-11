@@ -17,7 +17,7 @@ class Character():
             history (list): 用于存储角色动作历史的列表。\n
         """
         print("读取角色文件：", character_file)
-        with open(character_file, 'r') as file:
+        with open(character_file, 'r', encoding='UTF-8') as file:
             data = yaml.load(file, Loader=yaml.FullLoader)
         self.name = data.get('name','')
         self.nickname = data.get('nickname','')
