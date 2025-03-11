@@ -7,6 +7,9 @@ express_love:
     target:
       state:
         开放: +5
+    actor:
+      state:
+        精神: +5
   description:
     start:
       - "{actor}低声向{target}诉说着自己有多想他，{target}向{actor}微笑，把头靠在{actor}的肩上，“我也是”。"

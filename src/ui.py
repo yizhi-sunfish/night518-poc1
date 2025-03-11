@@ -55,7 +55,7 @@ class UI:
         table_player.add_row("性欲", self.progress_bar(player.state['性欲'], color="magenta"))
         table_player.add_row("体感", self.progress_bar(player.state['体感'], color="green"))
         table_player.add_row("精神", self.progress_bar(player.state['精神'], color="blue"))
-        table_player.add_row("专注", self.progress_bar(player.state['专注'], color="grey"))
+        #table_player.add_row("专注", self.progress_bar(player.state['专注'], color="grey"))
 
         table_partner.add_row("性欲", self.progress_bar(partner.state['性欲'], color="magenta"))
         table_partner.add_row("体感", self.progress_bar(partner.state['体感'], color="green"))
@@ -107,6 +107,7 @@ class UI:
         available_actions = {}
         action_index_map = []
         j = 0  # 仅计算可执行的选项编号
+        default_actions = {}
 
         # 遍历玩家可用的身体部位
         # 在每个loop，查询当前身体部位是否被占用，如是，加入停止动作
@@ -126,6 +127,7 @@ class UI:
                 end_action.name = "停止" + end_action.name
                 available_actions[part].append((j + 1, continue_action))
                 action_index_map.append((j + 1, continue_action, part))
+                default_actions[part] = str(j + 1)
                 available_actions[part].append((j + 2, end_action))
                 action_index_map.append((j + 2, end_action, part))
                 j += 2
@@ -158,6 +160,7 @@ class UI:
                 (id, paction) = action_id
 
         action_texts = "\n"
+        active_parts = []
         for body_part, actions_list in available_actions.items():
             # 为每个action设置actBodyPart
             #for num, action in actions_list:
@@ -165,9 +168,15 @@ class UI:
             #        if num == n and body_part == part:
             #            act.set_actBodyPart(body_part)
             #            action_index_map[idx] = (num, act, body_part)
-            action_part_texts = [f"{num}. {action.name.format(player=player.name,partner=partner.name,chosenCloth=action.chosenCloth)}" for num, action in actions_list]
+            action_part_texts = []
+            for num, action in actions_list:
+                action_part_texts.append(f"{num}. {action.name.format(player=player.name,partner=partner.name,chosenCloth=action.chosenCloth)}")
+                if str(num) in default_actions.values():
+                    action_part_texts[-1] += "（默认）"
             if action_part_texts:
                 action_texts += f"【{body_part}】 " + "  ".join(action_part_texts) + "\n"
+                active_parts.append(body_part)
+                
         self.console.print(Panel(action_texts, border_style="cyan", title="[bold white]可选行动[/]"))
 
         # 让玩家输入多个编号
@@ -191,6 +200,13 @@ class UI:
                 
             except (ValueError, StopIteration):
                 print(f"⚠️ 无效选择: {choice}，跳过")
+
+        for active_part in active_parts:
+            if active_part not in occupied_parts and active_part in default_actions.keys():
+                #print("监测到可用身体部位没有动作且默认动作存在")
+                default_action = next(a for num, a, p in action_index_map if num == int(default_actions[active_part]))
+                selected_actions.append(default_action)
+                occupied_parts.add(active_part)
 
         return selected_actions  # 返回选定的多个动作
     

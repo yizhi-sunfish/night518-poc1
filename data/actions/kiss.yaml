@@ -9,6 +9,11 @@ gentle_kiss:
         性欲: +2
         体感: +2
         开放: +2
+    actor:
+      state:
+        性欲: +2
+        体感: +2
+        精神: +5
   description:
     start:
       - "{actor}轻轻地吻了{target}的唇，他的嘴唇柔软而温暖，让{actor}感到一阵阵的幸福。"
@@ -40,6 +45,10 @@ deep_kiss:
         嘴:
           isOccupied: true
     actor:
+      state:
+        性欲: +3
+        体感: +5
+        精神: +5
       bodyParts:
         嘴:
           isOccupied: true
@@ -49,7 +58,7 @@ deep_kiss:
       - "“把嘴张开。”{actor}命令道。{target}迟疑了一下，但乖乖地照做了。他顺从地闭上眼，微微抬起头，让{actor}心中升起一股愉悦的满足感。{actor}有些粗暴地拉起他的下巴，贪婪地品尝着他的顺从。"
     continue:
       - "{actor}的舌头在{target}的口中游走，偶尔泄露出一声被欲望催生出的轻哼，让他感到一阵阵的颤栗。"
-      - "{actor}暂时放开了{target}的嘴，看了看他羞红了的脸。“真可爱。”{actor}说着，又将这个吻继续下去。"
+      - "{actor}暂时放开了{target}的嘴，看了看他羞红了的脸。“真可爱。”{actor}说，又将这个吻继续下去。{target}因为你的夸赞似乎更兴奋了，忍不住呻吟了一小声。"
       - "{actor}和{target}谁也不愿意先分开，你们共享着彼此炽热的呼吸，共同沉浸在这一刻的浪漫中。"
     end:
       - "{actor}和{target}分开时，唾液在你们的唇间留下了一道细细的银线，{target}显然也注意到了这一点，他的脸羞得通红，什么话都说不出来。"
