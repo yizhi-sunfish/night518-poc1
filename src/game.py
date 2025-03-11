@@ -1,29 +1,59 @@
 from character import Character
 from event import Event
 from ui import UI
+import time
 
 class Game:
     def __init__(self):
-        self.player = Character("你", is_player=True) # 阿伦第二人称
-        self.partner = Character("佐音", is_player=False)
+        """
+        初始化游戏，包括玩家和伙伴角色、用户界面和游戏状态。\n
+        属性:\n
+            player (Character): 从 YAML 文件加载的主玩家角色。\n
+            partner (Character): 从 YAML 文件加载的伙伴角色。\n
+            ui (UI): 游戏的用户界面。\n
+            running (bool): 一个标志，指示主游戏机制是否正在运行。\n
+            result (str): 用于存储游戏结果的字符串。
+        """
+        
+        self.player = Character("data/characters/player.yaml", is_player=True) 
+        self.partner = Character("data/characters/partner.yaml", is_player=False)
         self.ui = UI()
         self.running = True
-        self.result = ""
+        self.result = "这个破旧的房间逼仄又安静。你们在床上坐下，你望向佐音，他的眼神和你对视，却又马上躲闪开。\n你们真的太久没见了，大概有三个月……？这期间能顺利活着回来已经很不错了，你不难想象是什么导致了他现在如此拘谨。\n但很显然，他的心还属于你，因为他一言不发地牵住了你的手，脸色已经微微发红。"
 
     def play_turn(self):
         """处理游戏的一个回合"""
+        '''
+        print("Aaron:")
+        print(self.player)
+        print(self.player.bodyParts)
+        print(self.player.clothing)
+        print("Zayn:")
+        print(self.partner)
+        print(self.partner.bodyParts)
+        print(self.partner.clothing)
+        '''
         self.ui.clean_screen()
-        self.ui.display_result(self.result)
-        Event.check_triggers(self.partner)
-        self.ui.display_status(self.partner)
-        action = self.ui.get_action_choice(self.player, self.partner)
-        self.result = action.execute()
-        self.player.updateHistory(action)
-        
+        self.ui.display_status(self.player, self.partner)
+        time.sleep(0.7)
+        self.ui.typewriter_panel(self.result)
+        time.sleep(0.7)
+        Event.check_triggers(self.player, self.partner,self.ui)
+        self.ui.console.print("")
+        time.sleep(0.7)
+        actions = self.ui.get_multiple_actions(self.player, self.partner)
+        self.result = ""
+        last_action = actions[-1]
+        for action in actions:
+            result = action.execute()
+            if result is not None:
+                self.result += result
+                if action != last_action:
+                    self.result += '\n\n'
+            self.player.updateHistory(action)
         # 终止条件
-        if self.partner.state["高潮"]:
+        if self.partner.state["性欲"] >= 100 and self.partner.state["体感"] >= 100:
             self.running = False
-
     def run(self):
         """主循环"""
         while self.running:

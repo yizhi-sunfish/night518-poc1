@@ -1,0 +1,3 @@
+# special actions that needs extra arguments
+undress: clothing.yaml
+take_off: clothing.yaml

@@ -1,6 +1,11 @@
-"轻吻": 
-  file: kiss.yaml
-  id: gentle_kiss
-"深入亲吻": 
-  file: kiss.yaml
-  id: deep_kiss
+gentle_kiss: kiss.yaml
+deep_kiss: kiss.yaml
+express_love: speech.yaml
+scold: speech.yaml
+caress: movements.yaml
+release_hair: movements.yaml
+licking: movements.yaml
+handjob: movements.yaml
+blowjob: movements.yaml
+frot: movements.yaml
+#sixty_nine: movements.yaml

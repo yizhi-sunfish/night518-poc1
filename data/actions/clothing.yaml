@@ -1,0 +1,81 @@
+undress:
+  name: "褪去{partner}的{chosenCloth}"
+  isContinuous: false
+  possibleBodyParts:
+    - 左手
+    - 右手
+  effects:
+    target:
+      state:
+        体感: +2
+        开放: +5
+      clothing:
+        chosenCloth: remove
+    actor:
+      state:
+        精神: +2
+        性欲: +2
+  description:
+    start:
+      # TODO: 用event来处理被脱完衣服target的不同反应
+      - "{actor}轻轻地解开{target}的{chosenCloth}，{target}的身体逐渐暴露在{actor}的面前，他不由自主地蜷起身子，试图挡住{actor}的视线，不过没什么用。"
+      - "{actor}一边熟练地脱下{target}的{chosenCloth}，一边哄着他配合自己。{target}的表情有点迷离，顺从地任凭{actor}将{chosenCloth}剥离自己的身体，他的目光一直黏在{actor}身上。"
+      - "{actor}将手扒在{chosenCloth}的边缘，{target}的脸红了，拽着衣服想要阻止{actor}的动作。{actor}稍微用了点劲，就让他松开了手。\n{chosenCloth}就这么轻飘飘地落在了地上，它的主人只忙着应付{actor}贪婪的目光，已经顾不上将它拾起来放好了。"
+  conditions:
+      all:
+        - type: "clothing"
+          owner: "target"
+          clothing: "{chosenCloth}"
+          isWorn: true
+        - type: "state"
+          owner: "target"
+          state: "开放"
+          min: 30
+      any:
+        - type: "bodyPart"
+          owner: "actor"
+          bodyPart: "左手"
+          isOccupied: false
+        - type: "bodyPart"
+          owner: "actor"
+          bodyPart: "右手"
+          isOccupied: false
+
+take_off:
+  name: "脱下{player}的{chosenCloth}"
+  isContinuous: false
+  possibleBodyParts:
+    - 左手
+    - 右手
+  effects:
+    target:
+      state:
+        性欲: +5
+        开放: +5
+    actor:
+      state:
+        体感: +2
+        精神: +2
+      clothing:
+        chosenCloth: remove
+  description:
+    start:
+      - "{actor}感到燥热，伸手把{chosenCloth}从自己身上脱下。{actor}的身体暴露在{target}面前，他似乎不想无礼地盯着看，但又忍不住偷偷瞄过来。"
+      - "{actor}脱下{chosenCloth}丢在地上，在这个过程里故意摇晃着纤瘦苗条的身体。{actor}知道{target}一定会看的。他会喜欢的。"
+      - "{actor}快速脱掉了{chosenCloth}。除去了身体上的束缚，{actor}感觉身上好受了一点。不过还是有一点冷，于是{actor}贴在了{target}身上。他轻轻地抱着{actor}，并没有趁机乱摸。"
+  conditions:
+      all:
+        - type: "clothing"
+          owner: "actor"
+          clothing: "{chosenCloth}"
+          isWorn: true
+      any:
+        - type: "bodyPart"
+          owner: "actor"
+          bodyPart: "左手"
+          isOccupied: false
+        - type: "bodyPart"
+          owner: "actor"
+          bodyPart: "右手"
+          isOccupied: false
+        

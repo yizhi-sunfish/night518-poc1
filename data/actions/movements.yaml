@@ -1,0 +1,302 @@
+caress:
+  name: "爱抚"
+  isContinuous: true
+  possibleBodyParts:
+    - 左手
+    - 右手
+  effects:
+    target:
+      state:
+        体感: +2
+        开放: +5
+    actor:
+      bodyParts:
+        actBodyPart:
+          isOccupied: true
+  description:
+    start:
+      - "{actor}轻轻摩挲着{target}的皮肤，{target}乖乖地感受着{actor}的触摸，看上去他似乎很喜欢。"
+      - "{actor}伸出{actBodyPart}来回抚摸着{target}的头发，{target}嘴角微微上翘，露出了一个甜美的笑容。"
+      - "{actor}在{target}的背上画着圈，这让{target}的身体微微颤抖，无意识地配合着{actor}的抚摸。"
+    continue:
+      - "{actor}继续爱抚着{target}的身体，{target}的脸上泛起了一丝红晕，他的眼睛里闪烁着期待的光芒。"
+    end:
+      - "{actor}的{actBodyPart}不再抚摸{target}的身体，{target}的脸上依然残留着红晕，他的眼睛里闪过一丝失落。"
+  conditions:
+    any:
+      - type: "bodyPart"
+        owner: "actor"
+        bodyPart: "左手"
+        isOccupied: false
+      - type: "bodyPart"
+        owner: "actor"
+        bodyPart: "右手"
+        isOccupied: false
+
+release_hair:
+  name: "散开{partner}的头发"
+  isContinous: False
+  possibleBodyParts:
+    - 左手
+    - 右手
+  effects:
+    target:
+      state:
+        体感: +3
+      bodyParts:
+        头发:
+          currentState: “散开”
+    actor:
+      state:
+        精神: +3
+  conditions:
+    all:
+      - type: "bodyPart"
+        owner: "target"
+        bodyPart: "头发"
+        currentState: "绑住"
+    any:
+      - type: "bodyPart"
+        owner: "actor"
+        bodyPart: "左手"
+        isOccupied: false
+      - type: "bodyPart"
+        owner: "actor"
+        bodyPart: "右手"
+        isOccupied: false
+  description:
+    start:
+      - "{target}的一头金发被整齐地绑成麻花辫垂在他的肩上。{actor}伸手将它松开，他的头发是那么浓密，披散时可以严实地盖住他的肩膀和胸部，让他看起来比往常更像个女孩。\n{target}任由{actor}这么做，他的嘴角始终挂着微笑。这带给{actor}平静和满足感。"
+
+licking:
+  name: "舔舐{partner}的皮肤"
+  isContinuous: true
+  possibleBodyParts:
+    - 嘴
+  effects:
+    target:
+      state:
+        性欲: +7
+        体感: +7
+        开放: +5
+    actor:
+      bodyParts:
+        嘴:
+          isOccupied: true
+  description:
+    start:
+      - "{actor}轻轻地舔舐着{target}的皮肤，唾液湿润了他的身体，{target}因为这过于淫靡的景象而有些不知所措，干脆闭上了眼睛。"
+      - "{actor}的舌头在{target}的耳朵边游走，{target}的身体蜷缩起来。{actor}知道他的耳朵有多敏感，于是变本加厉地舔舐着，直到他不受控制地发出呜咽声。"
+      - "{actor}舔舐着{target}的脖颈，留下一道道湿润的痕迹，{target}不自然地呼吸着，他咬紧了嘴唇，仿佛在忍受着什么。"
+    continue:
+      - "{actor}继续饥渴地舔舐着{target}，就像对待一块美味的糖果一样。{target}开始哀求{actor}停下来。"
+      - "{target}的皮肤是如此柔软，{actor}不愿意就这么放手，{actor}的舌头在他的身体上游走打转，品尝着每一寸皮肤。{target}扭动着身体，不知是想迎合{actor}，还是想要躲开。"
+    end:
+      - "{actor}停下了舔舐，但{target}仍然没有回过神来，他的身体还在不自觉地扭动。过了一会儿，他才意识到自己的失态，脸上泛起一丝羞愧。"
+  conditions:
+    all:
+      - type: "state"
+        owner: target
+        state: "开放"
+        min: 30
+      - type: "bodyPart"
+        owner: actor
+        bodyPart: "嘴"
+        isOccupied: false
+
+handjob:
+  name: "撸动{partner}的阴茎"
+  isContinuous: true
+  possibleBodyParts:
+    - 左手
+    - 右手
+  effects:
+    target:
+      state:
+        性欲: +15
+        体感: +10
+        开放: +10
+      bodyParts:
+        阴茎:
+          isOccupied: true 
+    actor:
+      bodyParts:
+        actBodyPart:
+          isOccupied: true
+  description:
+    start:
+      - "{actor}伸出{actBodyPart}去抚摸{target}的阴茎。{actor}能感觉到那里似乎比往常还要硬，{actor}捏了捏，让{target}发出一声闷哼。\n{actor}温柔地绕着柱身摸了一圈，然后有节奏地上下撸动起来。"
+    continue:
+      - "{actor}熟悉{target}的身体，当然也包括他的阴茎。{actor}灵巧的手指触动着每一个他有感觉的地方，很快，前精从他的铃口溢出，可爱极了。"
+      - "{actor}握住{target}的龟头，用手指肚在马口处按摩，并时不时尝试探入。这种更像是在折磨的行为让{target}发出介于痛苦和快乐之间的呻吟。"
+      - "“{actorNickname}……你的手，真漂亮……”{target}呢喃着望向{actor}触碰着他的手，{actor}能看出他无比享受{actor}手上的动作，这也让{actor}欣喜若狂。"
+    end:
+      - "{actor}把{actBodyPart}从{target}的阴茎上放开，{target}张张嘴想说什么，但是忍住了。他的阴茎在{actor}的刺激之下高昂着头。"
+  conditions:
+    all:
+      - type: "state"
+        owner: target
+        state: "开放"
+        min: 50
+      - type: "state"
+        owner: target
+        state: "性欲"
+        min: 50
+      - type: "bodyPart"
+        owner: target
+        bodyPart: "阴茎"
+        isOccupied: false
+        isCovered: false
+    any:
+      - type: "bodyPart"
+        owner: "actor"
+        bodyPart: "左手"
+        isOccupied: false
+      - type: "bodyPart"
+        owner: "actor"
+        bodyPart: "右手"
+        isOccupied: false
+
+blowjob:
+  name: "口交"
+  isContinuous: true
+  possibleBodyParts:
+    - 嘴
+  effects:
+    target:
+      state:
+        性欲: +10
+        体感: +10
+        开放: +10
+      bodyParts:
+        阴茎:
+          isOccupied: true
+    actor:
+      bodyParts:
+        嘴:
+          isOccupied: true
+  description:
+    start:
+      - "{actor}俯下身子，好让嘴巴贴近{target}的阴茎。他发现了{actor}要做什么，羞得把脸埋在臂弯里。他的阴茎却硬挺着表达热情，似乎在邀请{actor}的嘴唇。\n{actor}张开嘴，轻轻地吻了一下龟头，然后有技巧地含住了它。\n“啊……{actorNickname}……”{target}在此刻无法控制自己的声音，他忘情地呼唤着{actor}。"
+    continue:
+      - "{actor}熟练地用嘴巴套弄着{target}的鸡巴。它个头很大，强迫{actor}张大嘴巴，下巴都有些发酸。但{actor}并不介意，{actor}享受着{target}的反应，享受着这种被动的快感。"
+      - "阴茎在{actor}的嘴里进进出出，{actor}故意让它发出咕啾咕啾的声音，本就淫荡的行为因此变得更加刺激。{target}显然也听到了，{actor}能看到他的耳朵变得通红。"
+      - "{actorNickname}，{actorNickname}，我……我好舒服……”{target}的声音破碎又凌乱，“啊啊……”他刻意压低呻吟声，不让声音传出这个房间。但这让{actor}更加兴奋，加快了吞吐的节奏。"
+    end:
+      - "{actor}突然停下了口中的动作，抬头吐出了{target}的阴茎看向他。他的阴茎还处于勃起的状态，湿润而红润，他的眼睛里满是欲望。\n“为什么……”他脱口而出，“为什么停下来？”但他没有继续说下去，为自己主动的索取而感到羞愧。"
+  conditions:
+    all:
+      - type: "state"
+        owner: target
+        state: "开放"
+        min: 50
+      - type: "bodyPart"
+        owner: actor
+        bodyPart: "嘴"
+        isOccupied: false
+      - type: "bodyPart"
+        owner: target
+        bodyPart: "阴茎"
+        isOccupied: false
+        isCovered: false
+
+frot:
+  name: 磨蹭{partner}的阴茎
+  isContinous: false
+  possibleBodyParts:
+    - 阴茎
+  effects:
+    target:
+      state:
+        性欲: +8
+        体感: +5
+        开放: +5
+    actor:
+      state:
+        性欲: +5
+        体感: +3
+        精神: +5
+  description:
+    start:
+      - 你将自己赤裸的分身同佐音的贴在一起，用腹部挤压着。这算不上有多舒服，但是佐音看上去很喜欢这种可以和你大面积紧贴的姿势，他积极地配合着你。
+      - 你们用阴茎磨蹭着彼此，你的下体传来一阵阵温暖的快感，这让你想到你们第一次做爱时佐音青涩的样子，那个时候他还一脸懵懂，根本不知道你在做什么。而现在，看着他依旧羞涩的表情和熟练起来的动作，你觉得非常满足。
+      - 你们的胯部交叠着，一同绕着对方的阴茎打转。佐音摆动臀部的样子性感极了，让你看得浑身燥热。你感到自己越发地硬了。他可能也发现了，弯起嘴角腼腆又有点得意地笑了笑。
+  conditions:
+    all:
+      - type: "bodyPart"
+        owner: actor
+        bodyPart: "阴茎"
+        isOccupied: false
+        isCovered: false
+      - type: "bodyPart"
+        owner: target
+        bodyPart: "阴茎"
+        isOccupied: false
+        isCovered: false
+      - type: "state"
+        owner: target
+        state: "开放"
+        min: 40
+
+sixty_nine:
+  name: 和{partner}相互口交
+  isContinous: true
+  possibleBodyParts:
+    - 阴茎
+    - 嘴
+  effects:
+    target:
+      bodyParts:
+        嘴:
+          isOccupied: true
+        阴茎:
+          isOccupied: true
+      state:
+        性欲: +8
+        体感: +8
+    actor:
+      bodyParts:
+        嘴:
+          isOccupied: true
+        阴茎:
+          isOccupied: true
+      state:
+        性欲: +10
+        体感: +10
+  conditions:
+    all:
+      - type: "state"
+        owner: target
+        state: "开放"
+        min: 90
+      - type: "state"
+        owner: actor
+        state: "精神"
+        min: 70
+      - type: "bodyPart"
+        owner: target
+        bodyPart: "阴茎"
+        isOccupied: false
+        isCovered: false
+      - type: "bodyPart"
+        owner: target
+        bodyPart: "嘴"
+        isOccupied: false
+        isCovered: false
+      - type: "bodyPart"
+        owner: actor
+        bodyPart: "阴茎"
+        isOccupied: false
+        isCovered: false
+      - type: "bodyPart"
+        owner: actor
+        bodyPart: "嘴"
+        isOccupied: false
+        isCovered: false
+  description:
+    start:
+      - "你的兴奋感越来越膨胀，普通的亲热已经满足不了你。“躺好了。”你把佐音推倒在床上，然后调转过身子。\n佐音看懂了你的动作，一时间手足无措起来。\n“你不喜欢？”你问。\n“不是，这个动作也太……”\n他的脸涨得通红，你故意用阴茎去磨蹭他的脸，让他更加不知所措。\n“你……你太色情了。”他说。\n“到底要不要做？”你不耐烦地问，然后用嘴对准了他的鸡巴，“想做就好好含着，像这样。”\n你一口含住了他巨大的阴茎，为了让他感受到更多刺激，你让这根肉棒直直地插到了喉咙。佐音“啊”地大叫了一声，然后没了声音。\n你看不到他的脸，正在奇怪他怎么样了的时候，下体传来一阵温热的濡湿感。\n佐音正在用舌头搅拌你的龟头。\n这感觉，真不错……"
+    continue:
+      - "你们卖力地含着对方的性具，用柔软的嘴唇和舌头给对方带来快感。你轮流舔舐着这根鸡巴上所有你知道的敏感点，但说实话有些力不从心了，因为你的下体一直在让你分心。\n不只是阴茎，就连睾丸也被他握在手里揉捏着，这让你的身体忍不住颤抖。\n他什么时候开始做得这么好？你不知道，但你享受着这个事实。"
+    end:
+      - "在你的攻势下，佐音逐渐松开了你的阴茎，因为他已经彻底沉浸在你口腔的触感里，放肆地浪叫着，无暇顾及为你口交。恐怕连他自己也没有意识到。\n你得意地放开了他。"
