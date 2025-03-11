@@ -11,6 +11,10 @@ undress:
         开放: +5
       clothing:
         chosenCloth: remove
+    actor:
+      state:
+        精神: +2
+        性欲: +2
   description:
     start:
       # TODO: 用event来处理被脱完衣服target的不同反应

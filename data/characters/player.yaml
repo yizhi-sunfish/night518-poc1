@@ -4,7 +4,7 @@ state:
   性欲: 60
   体感: 30
   精神: 20
-  专注: 100
+  专注: 100 #影响部分行动的成功率
 bodyParts:
   表情:
     isOccupied: false

@@ -12,16 +12,19 @@ import copy
 
 class UI:
     def __init__(self):
+        """初始化Console对象"""
         self.console = Console()
 
     def progress_bar(self, value, max_value=100, width=20, color="green"):
         """生成可视化进度条"""
+        # TODO: 加入每个属性的数值所对应的含义，例如：体感 30% 难受
         filled_length = int(width * value // max_value)  # 计算填充的长度
         empty_length = width - filled_length  # 计算剩余的长度
         bar = "█" * filled_length + "░" * empty_length  # 使用 Unicode 方块构造进度条
         return f"[{color}]{bar}[/] {value}%"  # 添加颜色
 # 逐字显示文本（打字机效果）
     def typewriter(self, text, delay=0.04, text_style="bold"):
+        """打字机效果"""
         for char in text:
             self.console.print(char, end="", style=text_style, highlight=False)
             time.sleep(delay)
@@ -37,10 +40,8 @@ class UI:
                 live.update(panel)
                 time.sleep(delay)  # 逐字延迟
 
-    def show_dialogue(self, text):
-        self.console.print(Panel(Text(text, style="bold magenta"), border_style="magenta"))
-
     def display_status(self, player, partner):
+        """显示当前两位角色的状态"""
 
         # TODO: use a generic format that both name and nickname can be used
         table_player = Table(title=f"[bold red]{player.nickname} 状态[/]")
@@ -63,6 +64,8 @@ class UI:
         self.console.print(Columns([table_player, table_partner], equal=True, expand=True, align="center"))
 
     def get_init_action_list(self, player, partner):
+        """生成所有动作的列表"""
+        # TODO: 尽可能让所有数据都自动生成，避免hardcode
         with open('data/actions/index.yaml', 'r', encoding='utf-8') as file:
             self.actions_index_data = yaml.safe_load(file)
         self.init_actions = [Action(id, 'data/actions/' + file_name, player, partner, 'start') for id, file_name in self.actions_index_data.items()]
@@ -75,7 +78,7 @@ class UI:
 
     # deprecated
     def get_single_choice(self, player, partner):
-        """获取玩家选择的行动"""
+        """获取玩家选择的单个行动(deprecated)"""
         with open('data/actions/index.yaml', 'r', encoding='utf-8') as file:
             self.actions_index_data = yaml.safe_load(file)
         actions = [Action(id, 'data/actions/'+file_name, player, partner, 'start') for id, file_name in self.actions_index_data.items()]
@@ -96,6 +99,8 @@ class UI:
         return actions[map[choice]]
     
     def get_multiple_actions(self, player, partner):
+        """打印当前可选行动，并获取玩家的选择。支持多个行动的输入。"""
+        # TODO: 重构。函数包含了太多逻辑，需要breakdown和去除冗余
         if not hasattr(self,'init_action_list'):
             self.get_init_action_list(player, partner)
         # 存储按身体部位分类的可执行动作
@@ -111,6 +116,9 @@ class UI:
                 available_actions[part] = []
             if player.bodyParts[part]['isOccupied']:
                 # 加入继续和停止的动作
+                # TODO: 这里有个bug需要修正
+                # 如果一个动作占用多个身体部位，那么下一轮多个身体部位会给出继续和停止的选项
+                # 但只有真正的actBodyPart才能够行动
                 path = {id:path for id, path in self.actions_index_data.items() if id == player.bodyParts[part]['currentAction']}
                 continue_action = Action(player.bodyParts[part]['currentAction'], 'data/actions/' + path[player.bodyParts[part]['currentAction']],player,partner,'continue',part)
                 end_action = Action(player.bodyParts[part]['currentAction'], 'data/actions/' + path[player.bodyParts[part]['currentAction']],player,partner,'end',part) 
@@ -187,11 +195,13 @@ class UI:
         return selected_actions  # 返回选定的多个动作
     
     def display_result(self, result):
+        """以rich panel格式显示上一回合结果的文本"""
         self.console.print(Panel(Text(result, style="bold magenta"), border_style="magenta"))
 
     # TODO: 从文件读取结局文本
     def display_end_message(self, player, partner):
-        self.console.clear()
+        """输出结局文本和历史操作"""
+        self.clean_screen()
         if partner.state["性欲"] >= 100:
             self.typewriter(f"\n{partner.name} 已经完全沉醉于快感中，他的身体不受控制地抽搐起来，手指在你身上抓出一道道痕迹，用最缠绵的声音呻吟着达到了巅峰。" +\
                   "乳白色的液体从他的阴茎喷涌而出。\n\n过了许久，他才慢慢恢复了平静，脸上泛起一片红晕。" +\
@@ -206,5 +216,6 @@ class UI:
                                 targetBodyPart=action.targetBodyPart))
     
     def clean_screen(self):
-        os.system('cls||clear')
+        """清除屏幕"""
+        self.console.clear()
 

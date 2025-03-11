@@ -33,8 +33,43 @@ caress:
         bodyPart: "右手"
         isOccupied: false
 
+release_hair:
+  name: "散开{partner}的头发"
+  isContinous: False
+  possibleBodyParts:
+    - 左手
+    - 右手
+  effects:
+    target:
+      state:
+        体感: +3
+      bodyParts:
+        头发:
+          currentState: “散开”
+    actor:
+      state:
+        精神: +3
+  conditions:
+    all:
+      - type: "bodyPart"
+        owner: "target"
+        bodyPart: "头发"
+        currentState: "绑住"
+    any:
+      - type: "bodyPart"
+        owner: "actor"
+        bodyPart: "左手"
+        isOccupied: false
+      - type: "bodyPart"
+        owner: "actor"
+        bodyPart: "右手"
+        isOccupied: false
+  description:
+    start:
+      - "{target}的一头金发被整齐地绑成麻花辫垂在他的肩上。{actor}伸手将它松开，他的头发是那么浓密，披散时可以严实地盖住他的肩膀和胸部，让他看起来比往常更像个女孩。\n{target}任由{actor}这么做，他的嘴角始终挂着微笑。这带给{actor}平静和满足感。"
+
 licking:
-  name: "舔舐"
+  name: "舔舐{partner}的皮肤"
   isContinuous: true
   possibleBodyParts:
     - 嘴
@@ -84,7 +119,6 @@ handjob:
       bodyParts:
         阴茎:
           isOccupied: true 
-          #TODO: not correctly triggered
     actor:
       bodyParts:
         actBodyPart:
@@ -149,7 +183,7 @@ blowjob:
       - "阴茎在{actor}的嘴里进进出出，{actor}故意让它发出咕啾咕啾的声音，本就淫荡的行为因此变得更加刺激。{target}显然也听到了，{actor}能看到他的耳朵变得通红。"
       - "{actorNickname}，{actorNickname}，我……我好舒服……”{target}的声音破碎又凌乱，“啊啊……”他刻意压低呻吟声，不让声音传出这个房间。但这让{actor}更加兴奋，加快了吞吐的节奏。"
     end:
-      - "{actor}突然停下了口中的动作，抬头吐出了{target}的阴茎看向他。他的阴茎还处于勃起的状态，湿润而红润，他的眼睛里满是欲望。\n“为什么……”他脱口而出，“为什么要停下来？”但他没有继续说下去，为自己主动的索取而感到羞愧。"
+      - "{actor}突然停下了口中的动作，抬头吐出了{target}的阴茎看向他。他的阴茎还处于勃起的状态，湿润而红润，他的眼睛里满是欲望。\n“为什么……”他脱口而出，“为什么停下来？”但他没有继续说下去，为自己主动的索取而感到羞愧。"
   conditions:
     all:
       - type: "state"
@@ -165,3 +199,104 @@ blowjob:
         bodyPart: "阴茎"
         isOccupied: false
         isCovered: false
+
+frot:
+  name: 磨蹭{partner}的阴茎
+  isContinous: false
+  possibleBodyParts:
+    - 阴茎
+  effects:
+    target:
+      state:
+        性欲: +8
+        体感: +5
+        开放: +5
+    actor:
+      state:
+        性欲: +5
+        体感: +3
+        精神: +5
+  description:
+    start:
+      - 你将自己赤裸的分身同佐音的贴在一起，用腹部挤压着。这算不上有多舒服，但是佐音看上去很喜欢这种可以和你大面积紧贴的姿势，他积极地配合着你。
+      - 你们用阴茎磨蹭着彼此，你的下体传来一阵阵温暖的快感，这让你想到你们第一次做爱时佐音青涩的样子，那个时候他还一脸懵懂，根本不知道你在做什么。而现在，看着他依旧羞涩的表情和熟练起来的动作，你觉得非常满足。
+      - 你们的胯部交叠着，一同绕着对方的阴茎画圈。佐音摆动臀部的样子性感极了，让你看得浑身燥热。你感到自己越发地硬了。
+  conditions:
+    all:
+      - type: "bodyPart"
+        owner: owner
+        bodyPart: "阴茎"
+        isOccupied: false
+        isCovered: false
+      - type: "bodyPart"
+        owner: target
+        bodyPart: "阴茎"
+        isOccupied: false
+        isCovered: false
+      - type: "state"
+        owner: target
+        state: "开放"
+        min: 40
+
+sixty_nine:
+  name: 和{partner}相互口交
+  isContinous: true
+  possibleBodyParts:
+    - 阴茎
+    - 嘴
+  effects:
+    target:
+      bodyParts:
+        嘴:
+          isOccupied: true
+        阴茎:
+          isOccupied: true
+      state:
+        性欲: +10
+        体感: +10
+    actor:
+      bodyParts:
+        嘴:
+          isOccupied: true
+        阴茎:
+          isOccupied: true
+      state:
+        性欲: +10
+        体感: +10
+  conditions:
+    all:
+      - type: "state"
+        owner: target
+        state: "开放"
+        min: 90
+      - type: "state"
+        owner: actor
+        state: "精神"
+        min: 70
+      - type: "bodyPart"
+        owner: target
+        bodyPart: "阴茎"
+        isOccupied: false
+        isCovered: false
+      - type: "bodyPart"
+        owner: target
+        bodyPart: "嘴"
+        isOccupied: false
+        isCovered: false
+      - type: "bodyPart"
+        owner: actor
+        bodyPart: "阴茎"
+        isOccupied: false
+        isCovered: false
+      - type: "bodyPart"
+        owner: actor
+        bodyPart: "嘴"
+        isOccupied: false
+        isCovered: false
+  description:
+    start:
+      - "你的兴奋感越来越膨胀，普通的亲热已经满足不了你。“躺好了。”你把佐音推倒在床上，然后调转过身子。\n佐音看懂了你的动作，一时间手足无措起来。\n“你不喜欢？”你问。\n“不是，这个动作也太……”\n他的脸涨得通红，你故意用阴茎去磨蹭他的脸，让他更加不知所措。\n“你……你太色情了。”他说。\n“到底要不要做？”你不耐烦地问，然后用嘴对准了他的鸡巴，“想做就好好含着，像这样。”\n你一口含住了他巨大的阴茎，为了让他感受到更多刺激，你让这根肉棒直直地插到了喉咙。佐音“啊”地大叫了一声，然后没了声音。\n你看不到他的脸，正在奇怪他怎么样了的时候，下体传来一阵温热的濡湿感。\n佐音正在用舌头搅拌你的龟头。\n这感觉，真不错……"
+    continue:
+      - "你们卖力地含着对方的性具，用柔软的嘴唇和舌头给对方带来快感。你轮流舔舐着这根鸡巴上所有你知道的敏感点，但说实话有些力不从心了，因为你的下体一直在让你分心。\n不只是阴茎，就连睾丸也被他握在手里揉捏着，这让你的身体忍不住颤抖。\n他什么时候开始做得这么好？你不知道，但你享受着这个事实。"
+    end:
+      - "在你的攻势下，佐音逐渐松开了你的阴茎，因为他已经彻底沉浸在你口腔的触感里，放肆地浪叫着，无暇顾及为你口交。恐怕连他自己也没有意识到。\n你得意地放开了他。"
