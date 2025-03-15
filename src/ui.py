@@ -23,12 +23,13 @@ class UI:
         bar = "█" * filled_length + "░" * empty_length  # 使用 Unicode 方块构造进度条
         return f"[{color}]{bar}[/] {value}%"  # 添加颜色
 # 逐字显示文本（打字机效果）
-    def typewriter(self, text, delay=0.04, text_style="bold"):
+    def typewriter(self, text, delay=0.04, text_style="bold", line_break=True):
         """打字机效果"""
         for char in text:
             self.console.print(char, end="", style=text_style, highlight=False)
             time.sleep(delay)
-        self.console.print()
+        if line_break:
+            self.console.print()
 
     def typewriter_panel(self, text, delay=0.04):
         """打字机效果 + Rich Panel"""
@@ -214,14 +215,8 @@ class UI:
         """以rich panel格式显示上一回合结果的文本"""
         self.console.print(Panel(Text(result, style="bold magenta"), border_style="magenta"))
 
-    # TODO: 从文件读取结局文本
     def display_end_message(self, player, partner):
-        """输出结局文本和历史操作"""
-        self.clean_screen()
-        if partner.state["性欲"] >= 100:
-            self.typewriter(f"\n{partner.name} 已经完全沉醉于快感中，他的身体不受控制地抽搐起来，手指在你身上抓出一道道痕迹，用最缠绵的声音呻吟着达到了巅峰。" +\
-                  "乳白色的液体从他的阴茎喷涌而出。\n\n过了许久，他才慢慢恢复了平静，脸上泛起一片红晕。" +\
-                      "\n\n“我爱你。”他凑到你的耳边轻轻对你说，然后在你脸上亲了一下。\n\n")
+        """输出历史操作"""
         print(f"你的历史操作:")
         for action in player.getHistory():
             time.sleep(0.7)

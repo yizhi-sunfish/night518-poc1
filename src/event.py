@@ -24,7 +24,7 @@ class Event:
         elif player.state["体感"] <= 50:
             ui.console.print(f"\n仅仅是呆在佐音的身边，你就感觉舒服了一点。这样的想法让你越发想要进一步触碰他。",style="yellow")
         elif player.state["体感"] <= 80:
-            ui.console.print(f"\n兴奋的感觉渐渐盖过了痛苦，你渴求着更多亲密的接触。",style="blue")
+            ui.console.print(f"\n兴奋的感觉渐渐盖过了痛苦，你渴求着更多亲密的接触。",style="cyan")
         time.sleep(0.7)
 
         if player.state["精神"] <= 25:
@@ -32,7 +32,7 @@ class Event:
         elif player.state["精神"] <= 40:
             ui.console.print(f"\n{player.name}始终不能放松下来，不快的感觉萦绕着{player.name}。还好{player.name}清楚自己是什么状态。{player.name}有{partner.name}在{player.name}身边，他的陪伴和触摸让{player.name}渐渐好起来。\n不会有问题的，是吧？", style = "yellow")
         elif player.state["精神"] <= 60:
-            ui.console.print(f"\n虽然不容易，但你感觉自己平静了下来。你终于有心情去看佐音的面庞。多么美丽的孩子，他在看你，你也望着他的眼睛，蓝色的，像一汪湖水。\n这片湖泊属于你。", style="blue")
+            ui.console.print(f"\n虽然不容易，但你感觉自己平静了下来。你终于有心情去看佐音的面庞。多么美丽的孩子，他在看你，你也望着他的眼睛，蓝色的，像一汪湖水。\n这片湖泊属于你。", style="cyan")
         else:
-            ui.console.print(f"\n你现在感觉棒极了，在佐音离开期间，从没有人让你感觉这么好过。你很高兴他终于回来了。\n如果时间能停留在这个时刻该多好，你想。", style="bold green")
+            ui.console.print(f"\n你现在感觉棒极了，在佐音离开期间，从没有人让你感觉这么好过。你很高兴他终于回来了。\n如果时间能停留在这个时刻该多好，你想。", style="green")
 
