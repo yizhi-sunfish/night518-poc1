@@ -6,14 +6,17 @@ from rich.table import Table
 from rich.columns import Columns
 from rich.live import Live
 import time
-import os
 import yaml
 import copy
-
+import pyfiglet
 class UI:
     def __init__(self):
         """初始化Console对象"""
         self.console = Console()
+
+    def display_title(self, text, style="bold white"):
+        ascii_art = pyfiglet.figlet_format(text, font="small")  # 选择简洁字体
+        self.console.print(Text(ascii_art, style=style))
 
     def progress_bar(self, value, max_value=100, width=20, color="green"):
         """生成可视化进度条"""
@@ -23,7 +26,7 @@ class UI:
         bar = "█" * filled_length + "░" * empty_length  # 使用 Unicode 方块构造进度条
         return f"[{color}]{bar}[/] {value}%"  # 添加颜色
 # 逐字显示文本（打字机效果）
-    def typewriter(self, text, delay=0.04, text_style="bold", line_break=True):
+    def typewriter(self, text, delay=0.04, text_style="", line_break=True):
         """打字机效果"""
         for char in text:
             self.console.print(char, end="", style=text_style, highlight=False)
@@ -37,7 +40,7 @@ class UI:
         with Live(refresh_per_second=10) as live:
             for char in text:
                 displayed_text += char
-                panel = Panel(Text(displayed_text), border_style="magenta")
+                panel = Panel(Text("\n"+displayed_text+"\n"), border_style="magenta")
                 live.update(panel)
                 time.sleep(delay)  # 逐字延迟
 
@@ -76,28 +79,6 @@ class UI:
         self.init_actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner, 'start', None, None, '四角内裤'))
         self.init_actions.append(Action('take_off', 'data/actions/clothing.yaml', player, partner, 'start', None, None, '高领紧身衣'))
         self.init_actions.append(Action('take_off', 'data/actions/clothing.yaml', player, partner, 'start', None, None, '黑色短裤'))
-
-    # deprecated
-    def get_single_choice(self, player, partner):
-        """获取玩家选择的单个行动(deprecated)"""
-        with open('data/actions/index.yaml', 'r', encoding='utf-8') as file:
-            self.actions_index_data = yaml.safe_load(file)
-        actions = [Action(id, 'data/actions/'+file_name, player, partner, 'start') for id, file_name in self.actions_index_data.items()]
-        # TODO：目前先手动加入脱衣选项，之后再想怎么更好地实现
-        actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner, 'start', '右手',None,'白色背心'))
-        actions.append(Action('undress', 'data/actions/clothing.yaml', player, partner, 'start', '左手',None,'四角内裤'))
-        
-        j = 0
-        action_text = []
-        map = [0] * len(actions)
-        for i, action in enumerate(actions):
-            if action.can_execute():
-                action_text += f"{j + 1}. {action.name.format(chosenCloth=action.chosenCloth)}\n"
-                map[j] = i
-                j += 1
-        choice = int(input("选择行动 (输入编号): ")) - 1
-        self.console.print(Panel(action_text, border_style="cyan", title="[bold white]可选行动[/]"))
-        return actions[map[choice]]
     
     def get_multiple_actions(self, player, partner):
         """打印当前可选行动，并获取玩家的选择。支持多个行动的输入。"""
