@@ -144,6 +144,6 @@ def ending(ui,player,partner):
     time.sleep(0.1)
     ui.typewriter("“……你还没有到呢，”",0.2,line_break=False)
     ui.typewriter("他看着你依旧硬邦邦的下体，伸出手去触碰它，",0.1,line_break=False)
-    ui.typewriter("“我……我来帮帮你。”\n",0.2,line_break=False)
+    ui.typewriter("“我……我来帮帮你。”\n",0.2)
     time.sleep(0.1)
     ui.typewriter("（未完）\n\n",0.1)

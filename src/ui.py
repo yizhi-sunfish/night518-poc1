@@ -203,11 +203,14 @@ class UI:
         print(f"你的历史操作:")
         for action in player.getHistory():
             time.sleep(0.7)
-            print(str(action).format(player=player.name,
+            self.console.print(str(action).format(player=player.name,
                                 partner=partner.name,
                                 chosenCloth=action.chosenCloth,
                                 actBodyPart=action.actBodyPart,
                                 targetBodyPart=action.targetBodyPart))
+        time.sleep(0.7)
+        self.console.print("\n感谢游玩!\n\n© 2025 一之翻车鱼",style="bold", highlight=False)
+
     
     def clean_screen(self):
         """清除屏幕"""
