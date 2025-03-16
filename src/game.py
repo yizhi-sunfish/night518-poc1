@@ -2,6 +2,7 @@ from character import Character
 from event import Event
 from ui import UI
 import time
+import plots
 
 class Game:
     def __init__(self):
@@ -18,29 +19,19 @@ class Game:
         self.player = Character("data/characters/player.yaml", is_player=True) 
         self.partner = Character("data/characters/partner.yaml", is_player=False)
         self.ui = UI()
-        self.running = True
-        self.result = "这个破旧的房间逼仄又安静。你们在床上坐下，你望向佐音，他的眼神和你对视，却又马上躲闪开。\n你们真的太久没见了，大概有三个月……？这期间能顺利活着回来已经很不错了，你不难想象是什么导致了他现在如此拘谨。\n但很显然，他的心还属于你，因为他一言不发地牵住了你的手，脸色已经微微发红。"
+        self.running = False
+        self.result = "这个破旧的房间逼仄又安静。你爬到佐音身上，望向他，他的眼神和你对视，却又马上躲闪开。\n你们真的太久没见了，距离让他对亲热行为有些抗拒。不过，能顺利活着回来已经是很好的结果了，你不难想象是什么导致了他现在如此拘谨。\n但很显然，他的心还属于你，因为他一言不发地牵住了你的手，脸色已经微微发红。\n现在你们只需要慢慢来。"
 
     def play_turn(self):
         """处理游戏的一个回合"""
-        '''
-        print("Aaron:")
-        print(self.player)
-        print(self.player.bodyParts)
-        print(self.player.clothing)
-        print("Zayn:")
-        print(self.partner)
-        print(self.partner.bodyParts)
-        print(self.partner.clothing)
-        '''
         self.ui.clean_screen()
         self.ui.display_status(self.player, self.partner)
-        time.sleep(0.7)
+        time.sleep(1)
         self.ui.typewriter_panel(self.result)
-        time.sleep(0.7)
+        time.sleep(1)
         Event.check_triggers(self.player, self.partner,self.ui)
         self.ui.console.print("")
-        time.sleep(0.7)
+        time.sleep(1)
         actions = self.ui.get_multiple_actions(self.player, self.partner)
         self.result = ""
         last_action = actions[-1]
@@ -55,8 +46,13 @@ class Game:
         if self.partner.state["性欲"] >= 100 and self.partner.state["体感"] >= 100:
             self.running = False
     def run(self):
+        self.ui.clean_screen()
+        self.ui.display_title("May 18th (demo)")
+        plots.opening(self.ui,self.player,self.partner)
+        self.running = True
         """主循环"""
         while self.running:
             self.play_turn()
+        plots.ending(self.ui,self.player,self.partner)
         self.ui.display_end_message(self.player, self.partner)
 

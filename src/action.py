@@ -156,7 +156,7 @@ class Action:
                 continue  # 忽略无效的角色key
             
             # 处理状态变更
-            if "state" in changes:
+            if "state" in changes and self.state is not "end":
                 for state_name, value in changes["state"].items():
                     affected_character.change_state(state_name, value)
 

@@ -14,9 +14,9 @@ express_love:
     start:
       - "{actor}低声向{target}诉说着自己有多想他，{target}向{actor}微笑，把头靠在{actor}的肩上，“我也是”。"
       - "{actor}对{target}说：“你看上去像个天使。”{target}的脸红了，他的眼睛里闪烁着幸福的光芒。"
-      - "“你是我眼里最完美的人。”{actor}说。{target}摇摇头，不好意思接受这份赞美，他的嘴里嘀咕着什么，{actor}听不清楚。"
+      - "“你是我眼里最完美的人。”{actor}说。{target}低下头，不好意思接受这份赞美，他的嘴里嘀咕着什么，{actor}听不清楚。"
       - "{actor}向{target}形容自己眼里的他有多可爱和美丽，{target}羞涩地笑着。"
-      - "“我爱你。”{actor}说。{target}无比认真地看着{actor}，问：“我们会永远在一起，对吗？”"
+      - "“我爱你。”{actor}说。{target}突然无比认真地看着{actor}，问：“我们会永远在一起，对吗？”"
   conditions:
       all:
         - type: "bodyPart"
@@ -53,3 +53,9 @@ scold:
           owner: actor
           state: "精神"
           max: 20
+
+# TODO
+
+tease: None
+
+verbal_control: None
