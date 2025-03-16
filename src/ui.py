@@ -9,6 +9,8 @@ import time
 import yaml
 import copy
 import pyfiglet
+
+# TODO: 重构rich的用法
 class UI:
     def __init__(self):
         """初始化Console对象"""

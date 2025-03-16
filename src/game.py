@@ -47,7 +47,7 @@ class Game:
             self.running = False
     def run(self):
         self.ui.clean_screen()
-        self.ui.display_title("May 18th (demo)")
+        self.ui.display_title("May 18th (PoC)")
         plots.opening(self.ui,self.player,self.partner)
         self.running = True
         """主循环"""

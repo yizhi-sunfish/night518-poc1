@@ -6,17 +6,17 @@ class Event:
     def check_triggers(player, partner, ui):
         """检查是否触发特殊事件"""
         if partner.state["开放"] < 20:
-            ui.console.print(f"\n{partner.name}看起来有些不安，你也许应该温柔一点。")
+            ui.console.print(f"\n{partner.name}看起来有些不安，你也许应该温柔一点。",style="yellow")
         elif partner.state["开放"] < 50:
-            ui.console.print(f"\n{partner.name}正在逐渐适应你的节奏。")
+            ui.console.print(f"\n{partner.name}正在逐渐适应你的节奏。",style="cyan")
         elif partner.state["开放"] <= 80:
-            ui.console.print(f"\n{partner.name}进入了状态，现在的他享受着和你的接触。")
+            ui.console.print(f"\n{partner.name}进入了状态，现在的他享受着和你的接触。",style="green")
         elif partner.state["性欲"] > 80 and partner.state["体感"] < 50:
-            ui.console.print(f"\n{partner.name}渴望地看着你，似乎想让你更主动一些。")
+            ui.console.print(f"\n{partner.name}渴望地看着你，似乎想让你更主动一些。",style="magenta")
         elif partner.state["性欲"] > 80 and partner.state["体感"] > 50:
-            ui.console.print(f"\n{partner.name}的眼神迷离起来，看起来沉浸在你带给他的快感当中。")
+            ui.console.print(f"\n{partner.name}的眼神迷离起来，看起来沉浸在你带给他的快感当中。",style="magenta")
         else:
-            ui.console.print(f"\n{partner.name}彻底放松下来，在你取悦他的时候，他也偷偷摸摸地做些小动作触摸你。")
+            ui.console.print(f"\n{partner.name}彻底放松下来，在你取悦他的时候，他也偷偷摸摸地做些小动作触摸你。",style="green")
         time.sleep(1)
 
         if player.state["体感"] <= 30:
@@ -26,7 +26,7 @@ class Event:
         elif player.state["体感"] <= 80:
             ui.console.print(f"\n兴奋的感觉渐渐盖过了痛苦，你渴求着更多亲密的接触，不要停下来。",style="cyan")
         else:
-            ui.console.print(f"\n你彻底进入了状态，每一次触碰都抚慰着你饱受折磨的身体，让你舒服到飘飘欲仙。",stype="magenta")
+            ui.console.print(f"\n你彻底进入了状态，每一次触碰都抚慰着你饱受折磨的身体，让你舒服到飘飘欲仙。",style="magenta")
         time.sleep(1)
 
         if player.state["精神"] <= 25:
