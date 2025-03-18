@@ -55,4 +55,5 @@ class Game:
             self.play_turn()
         plots.ending(self.ui,self.player,self.partner)
         self.ui.display_end_message(self.player, self.partner)
+        input("（按回车键退出）")
 
