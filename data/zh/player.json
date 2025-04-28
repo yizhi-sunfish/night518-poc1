@@ -2,10 +2,21 @@
   "name": "你",
   "nickname": "阿伦",
   "state": {
-	"性欲": 60,
-	"体感": 30,
-	"精神": 20,
-	"专注": 100
+	"性欲": {
+	  "value": 60,
+	  "color": "deep_pink"
+	},
+	"体感": {
+	  "value": 30,
+	  "color": "lime_green"
+	},
+	"精神": {
+	  "value": 20,
+	  "color": "blue"
+	},
+	"专注": {
+	  "value": 100
+	}
   },
   "bodyParts": {
 	"表情": {
