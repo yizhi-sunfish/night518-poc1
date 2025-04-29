@@ -1,7 +1,6 @@
 extends Node
-class_name FileProcessor
 
-func read_from_file(file_path):
+func read_from_json_file(file_path):
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var content = file.get_as_text()
 	var json = JSON.new()
@@ -16,7 +15,5 @@ func read_from_file(file_path):
 		return data_received
 	else:
 		print("JSON Parse Error: ", json.get_error_message(), " in ", file_path, " at line ", json.get_error_line())
-		return ""
+		return null
 		
-func _ready() -> void:
-	read_from_file("res://data/zh/player.json")

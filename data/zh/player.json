@@ -1,7 +1,7 @@
 {
   "name": "你",
   "nickname": "阿伦",
-  "state": {
+  "states": {
 	"性欲": {
 	  "value": 60,
 	  "color": "deep_pink"
@@ -58,7 +58,7 @@
 	  "isCovered": true
 	}
   },
-  "clothing": {
+  "clothes": {
 	"高领紧身衣": {
 	  "covers": [
 		"胸部"
