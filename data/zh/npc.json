@@ -1,0 +1,79 @@
+{
+	"name": "佐音",
+	"states": {
+		"性欲": {
+			"value": 10,
+			"color": "deep_pink",
+			"hidden": false
+		},
+		"体感": {
+			"value": 50,
+			"color": "lime_green",
+			"hidden": false
+		},
+		"开放": {
+			"value": 0,
+			"color": "red",
+			"hidden": false
+		}
+	},
+	"bodyParts": {
+		"头发": {
+			"isOccupied": false,
+			"currentState": "绑住",
+			"isCovered": false
+		},
+		"表情": {
+			"isOccupied": false,
+			"currentAction": "",
+			"isCovered": false
+		},
+		"嘴": {
+			"isOccupied": false,
+			"currentState": "空闲",
+			"currentAction": "",
+			"isCovered": false
+		},
+		"左手": {
+			"isOccupied": false,
+			"currentAction": "",
+			"isCovered": false
+		},
+		"右手": {
+			"isOccupied": false,
+			"currentAction": "",
+			"isCovered": false
+		},
+		"阴茎": {
+			"isOccupied": false,
+			"currentState": "未勃起",
+			"currentAction": "",
+			"isCovered": true
+		},
+		"臀部": {
+			"isOccupied": false,
+			"currentState": "未扩张",
+			"currentAction": "",
+			"isCovered": true
+		},
+		"胸部": {
+			"isOccupied": false,
+			"currentState": "平静",
+			"currentAction": "",
+			"isCovered": true
+		}
+	},
+	"clothes": {
+		"白色背心": {
+			"covers": [
+				"胸部"
+			]
+		},
+		"四角内裤": {
+			"covers": [
+				"阴茎",
+				"臀部"
+			]
+		}
+	}
+}

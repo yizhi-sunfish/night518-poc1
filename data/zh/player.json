@@ -4,18 +4,23 @@
   "states": {
 	"性欲": {
 	  "value": 60,
-	  "color": "deep_pink"
+	  "color": "deep_pink",
+	  "hidden": false
 	},
 	"体感": {
 	  "value": 30,
-	  "color": "lime_green"
+	  "color": "lime_green",
+	  "hidden": false
 	},
 	"精神": {
 	  "value": 20,
-	  "color": "blue"
+	  "color": "blue",
+	  "hidden": false
 	},
 	"专注": {
-	  "value": 100
+	  "value": 100,
+	  "color": "white",
+	  "hidden": true
 	}
   },
   "bodyParts": {
