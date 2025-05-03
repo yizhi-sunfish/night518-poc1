@@ -14,5 +14,5 @@ func single_status_bar_text(state_dict:Dictionary,key:String) -> String:
 	var status_bar_count = floor(state_dict[key]["value"] * status_bar_length / 100.0)
 	var status_bar_text = ""
 	status_bar_text += "█".repeat(status_bar_count) + "░".repeat(status_bar_length - status_bar_count)
-	return key + "： [color=%s]" % state_dict[key]["color"] + status_bar_text + "[/color] " + "%2d" % int(state_dict[key]["value"])
+	return key + " [color=%s]" % state_dict[key]["color"] + status_bar_text + "[/color] " + "%2d" % int(state_dict[key]["value"])
 		

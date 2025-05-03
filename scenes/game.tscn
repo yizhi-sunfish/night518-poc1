@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://cm8mupih8xceh"]
+[gd_scene load_steps=14 format=3 uid="uid://cm8mupih8xceh"]
 
 [ext_resource type="FontFile" uid="uid://d3v1n54amcu4v" path="res://assets/fonts/fusion-pixel-12px-monospaced-zh_hans.ttf" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://wb8m7owt8tg4" path="res://scripts/player.gd" id="2_iywne"]
 [ext_resource type="Script" uid="uid://bav31y8lg4mh2" path="res://scripts/status_bar_label.gd" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://cg302q1gfrwgb" path="res://scripts/npc.gd" id="2_p57ef"]
 [ext_resource type="Script" uid="uid://cptt8lo1wju6o" path="res://scripts/input.gd" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://cegw8iaj8kcmm" path="res://scripts/action_response_label.gd" id="5_p57ef"]
+[ext_resource type="Script" uid="uid://caeh1juxyg14v" path="res://scripts/status_label.gd" id="5_u5sy4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8cj0n"]
 bg_color = Color(0.0674377, 0.0674377, 0.0674377, 1)
@@ -158,6 +160,7 @@ bbcode_enabled = true
 text = "[color=red]你感觉糟透了，焦虑在你身体里横冲直撞，有什么东西要溢出来，你分辨不清，总之不会是好东西。
 佐音正在看着你，他的目光透露出担忧……有什么好担忧的？看了就让人烦躁。[/color]"
 scroll_active = false
+script = ExtResource("5_u5sy4")
 
 [node name="MainTextArea" type="Panel" parent="MainUIMargin/UI/TextDisplayArea"]
 layout_mode = 2
@@ -189,12 +192,13 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/line_spacing = 5
 theme_override_fonts/font = ExtResource("1_uwrxv")
 theme_override_font_sizes/font_size = 20
-text = "这个破旧的房间逼仄又安静。佐音躺在床上，你双手落在他两侧，膝盖抵着床垫，就这么把自己支起来，从上方看向他。
+text = "这个破旧的房间逼仄又安静。佐音躺在床上，你双手撑在他两侧，膝盖抵着床垫，就这么把自己支起来，从上方看向他。
 
 他的眼神和你对视，却又马上躲闪开。竟然这么腼腆，你们真的太久没见了不是吗？你有点想笑。嗯，你的确是太心急了，连休息的时间也不给他。谁让你自己的时间已经不多了呢？
 
 几缕发丝不老实地从你肩上滑落，垂在他脸上。"
 autowrap_mode = 3
+script = ExtResource("5_p57ef")
 
 [node name="HintLabel" type="RichTextLabel" parent="MainUIMargin/UI/TextDisplayArea/MainTextArea/MainTextMargin/MainTextArea"]
 visible = false
@@ -218,7 +222,8 @@ theme_override_constants/line_separation = 5
 theme_override_fonts/normal_font = ExtResource("1_uwrxv")
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "[color=lime_green]佐音的眼神不再躲躲闪闪。他的身体也放松了下来。[/color]"
+text = "[color=yellow]佐音看起来有些不安，你也许应该温柔一点。[/color]"
+script = ExtResource("5_u5sy4")
 
 [node name="ActionListLabel" type="Label" parent="MainUIMargin/UI"]
 layout_mode = 2
